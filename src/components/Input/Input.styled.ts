@@ -6,7 +6,7 @@ export const StyledInput = styled.div<InputProps>`
   flex-direction: column;
   position: relative;
   gap: 0.4rem;
-
+  color: ${(p) => p.theme.base.contrast};
   .with-icon {
     position: relative;
     flex-direction: row;
