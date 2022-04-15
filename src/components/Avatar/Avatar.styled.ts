@@ -8,6 +8,7 @@ export const StyledAvatar = styled.span<AvatarProps>`
   object-fit: cover;
   width: 4rem;
   height: 4rem;
+  flex-shrink: 0;
 
   ${(p) =>
     p.type === "span" &&

@@ -1,6 +1,6 @@
 import Api from "./api";
 
-export default {
+const AuthService = {
   doLogin: async (login) => {
     try {
       const response = await Api.post("/api/auth/login", { ...login });
@@ -19,3 +19,5 @@ export default {
     }
   },
 };
+
+export default AuthService;
