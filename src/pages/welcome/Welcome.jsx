@@ -1,5 +1,11 @@
-import React from "react";
+import { LinkButton } from "src/components/Button";
 
 export default function Welcome() {
-  return <div>Welcome Page</div>;
+  return (
+    <div>
+      <LinkButton color="secondary" to="/home">
+        Home
+      </LinkButton>
+    </div>
+  );
 }

@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { ColorTypes, SizeTypes } from "../types/types";
 import StyledButton from "./Button.styled";
-import { ButtonTypes } from "./types";
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   size?: SizeTypes;
@@ -37,7 +36,7 @@ export const LinkButton = styled(NavLink)`
   padding: 0.5rem 1rem;
   text-decoration: none;
   border-radius: 5px;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   &.active {

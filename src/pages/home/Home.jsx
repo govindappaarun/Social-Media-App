@@ -1,5 +1,17 @@
-import React from "react";
+import { Outlet } from "react-router-dom";
+import { NavBar, Typography } from "src/components";
+import { LinkButton } from "src/components/Button";
 
 export default function Home() {
-  return <div>Home Page -&gt; Welcome</div>;
+  return (
+    <div>
+      <Typography variant="h3">Welcome </Typography>
+      <NavBar>
+        <LinkButton color="primary" to="feed">
+          My Feed
+        </LinkButton>
+      </NavBar>
+      <Outlet />
+    </div>
+  );
 }

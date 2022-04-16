@@ -2,6 +2,7 @@ import { useRoutes } from "react-router-dom";
 import Home from "./pages/home";
 import Login from "./pages/login";
 import SignUp from "./pages/singup";
+import UserFeed from "./pages/userFeed";
 import Welcome from "./pages/welcome";
 import SecureRoute from "./SecureRoute";
 
@@ -19,6 +20,28 @@ const privateRoutes = [
         <Home />
       </SecureRoute>
     ),
+    children: [
+      {
+        path: "createPost",
+        element: <div>Create Post</div>,
+      },
+      {
+        path: "feed",
+        element: <UserFeed />,
+      },
+      {
+        path: "bookmarks",
+        element: <div>Bookmarks Page</div>,
+      },
+      {
+        path: "viewPost/:postId",
+        element: <div>View a Post</div>,
+      },
+      {
+        path: "profile/:userId",
+        element: <div>Profile of given user</div>,
+      },
+    ],
   },
 ];
 
