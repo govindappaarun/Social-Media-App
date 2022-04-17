@@ -7,9 +7,10 @@ export type Props = {
 
 function Loader({ show }: Props) {
   return show ? (
-    <StyledWrapper>
+    <>
+      <StyledWrapper />
       <StyledLoader />
-    </StyledWrapper>
+    </>
   ) : null;
 }
 

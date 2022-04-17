@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { makeServer } from "./server";
-import { Provider } from "./contexts";
+import Provider from "./contexts";
 import "./index.css";
 
 makeServer();
