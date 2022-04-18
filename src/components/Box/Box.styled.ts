@@ -5,6 +5,7 @@ import { BoxProps } from "./Box";
 export const StyledBox = styled.div<BoxProps>`
   position: relative;
   display: ${(p) => p.display || "block"};
+  position: ${(p) => p.position || "relative"};
   flex-direction: ${(p) => p.direction || "row"};
 
   gap: ${(p) => (p.gap ? Size[p.gap] : 0)};

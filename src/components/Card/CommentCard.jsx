@@ -5,8 +5,8 @@ import StyledWrapper from "./CommentCard.styled";
 import { Icon } from "./PostCard.styled";
 import { RiReplyLine } from "react-icons/ri";
 
-export default function ({ comment }, ...rest) {
-  const { message, username, time, avatarText } = comment;
+export default function CommentCard({ comment, ...rest }) {
+  const { content, username, createdAt, avatarText = "NA" } = comment;
   return (
     <StyledWrapper {...rest}>
       <Box display="flex" gap="lg">
@@ -19,13 +19,13 @@ export default function ({ comment }, ...rest) {
           gap="sm"
         >
           <Box display="flex" alignItems="center" gap="sm">
-            <Typography variant="span">{username}}</Typography>
-            <Typography variant="span">{time}</Typography>
+            <Typography variant="span">{username}</Typography>
+            <Typography variant="span">{createdAt}</Typography>
             <Icon>
               <RiReplyLine />
             </Icon>
           </Box>
-          <Typography variant="span">{message}</Typography>
+          <Typography variant="span">{content}</Typography>
         </Box>
       </Box>
     </StyledWrapper>

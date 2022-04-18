@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import { NavBar, Typography } from "src/components";
 import { LinkButton } from "src/components/Button";
+import Post from "src/components/Post";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
           My Feed
         </LinkButton>
       </NavBar>
+      <Post />
       <Outlet />
     </div>
   );

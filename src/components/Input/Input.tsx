@@ -12,27 +12,25 @@ export type InputProps = {
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function Input({
-  type,
-  placeholder,
-  children,
-  min,
-  max,
-  name,
-  onChange,
-  ...rest
-}: InputProps) {
-  return (
-    <StyledInput type={type} {...rest}>
-      {children}
-      <input
-        type={type || "text"}
-        placeholder={placeholder}
-        min={min}
-        max={max}
-        name={name}
-        onChange={onChange}
-      />
-    </StyledInput>
-  );
-}
+export type Ref = HTMLInputElement;
+
+const Input = React.forwardRef<Ref, InputProps>(
+  ({ type, placeholder, children, min, max, name, onChange, ...rest }, ref) => {
+    return (
+      <StyledInput type={type} {...rest}>
+        {children}
+        <input
+          ref={ref}
+          type={type || "text"}
+          placeholder={placeholder}
+          min={min}
+          max={max}
+          name={name}
+          onChange={onChange}
+        />
+      </StyledInput>
+    );
+  }
+);
+
+export default Input;

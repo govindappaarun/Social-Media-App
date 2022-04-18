@@ -18,6 +18,12 @@ const Button = styled.button<ButtonProps>`
   cursor: pointer;
   line-height: ${(p) => (p.size ? ButtonSize[p.size] : ButtonSize.md)};
 
+  ${(p) =>
+    p.radius &&
+    css`
+      border-radius: ${p.radius};
+    `}
+
   ${(props) =>
     props.disabled &&
     css`
