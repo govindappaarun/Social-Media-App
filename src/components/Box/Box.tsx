@@ -5,6 +5,7 @@ import { JC, AI, Wrap, AS, Direction, Display } from "./types";
 
 export type BoxProps = {
   display?: Display;
+  position?: "relative" | "absolute" | "fixed" | "static" | "sticky";
   justifyContent?: JC;
   alignItems?: AI;
   alignSelf?: AS;

@@ -3,6 +3,7 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import SignUp from "./pages/singup";
 import UserFeed from "./pages/userFeed";
+import ViewPost from "./pages/viewPost";
 import Welcome from "./pages/welcome";
 import SecureRoute from "./SecureRoute";
 
@@ -26,7 +27,7 @@ const privateRoutes = [
         element: <div>Create Post</div>,
       },
       {
-        path: "feed",
+        path: "feed/*",
         element: <UserFeed />,
       },
       {
@@ -35,7 +36,7 @@ const privateRoutes = [
       },
       {
         path: "viewPost/:postId",
-        element: <div>View a Post</div>,
+        element: <ViewPost />,
       },
       {
         path: "profile/:userId",

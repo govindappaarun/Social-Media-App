@@ -16,6 +16,7 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
+    comments: [],
     mediaUrl:
       "https://res.cloudinary.com/db9adijl0/image/upload/v1647968621/ecomm-assets/course-7_idjwwv.jpg",
     username: "adarshbalika",
@@ -31,6 +32,7 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
+    comments: [],
     mediaUrl:
       "https://res.cloudinary.com/db9adijl0/image/upload/v1647968621/ecomm-assets/course-5_a10cjy.jpg",
     username: "shubhamsoni",
@@ -46,6 +48,7 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
+    comments: [],
     comments: [],
     mediaUrl:
       "https://res.cloudinary.com/db9adijl0/image/upload/v1647968621/ecomm-assets/course-4_dd2erl.jpg",
@@ -63,6 +66,7 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
+    comments: [],
     mediaUrl:
       "https://res.cloudinary.com/db9adijl0/image/upload/v1647968622/ecomm-assets/course-1_pi9q9e.jpg",
     username: "shubhamsoni",
@@ -79,6 +83,7 @@ export const posts = [
       dislikedBy: [],
     },
     comments: [],
+    comments: [],
     mediaUrl:
       "https://res.cloudinary.com/db9adijl0/image/upload/v1647968621/ecomm-assets/course-2_mnssso.jpg",
     username: "shubhamsoni",
@@ -94,6 +99,7 @@ export const posts = [
       likedBy: [],
       dislikedBy: [],
     },
+    comments: [],
     comments: [],
     mediaUrl:
       "https://res.cloudinary.com/db9adijl0/image/upload/v1647968622/ecomm-assets/course-1_pi9q9e.jpg",

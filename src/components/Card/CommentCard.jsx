@@ -19,7 +19,7 @@ export default function ({ comment }, ...rest) {
           gap="sm"
         >
           <Box display="flex" alignItems="center" gap="sm">
-            <Typography variant="span">{username}}</Typography>
+            <Typography variant="span">{username}</Typography>
             <Typography variant="span">{time}</Typography>
             <Icon>
               <RiReplyLine />

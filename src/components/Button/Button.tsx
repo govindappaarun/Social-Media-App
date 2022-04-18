@@ -13,6 +13,7 @@ export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   onClick?: (e: React.MouseEvent) => void;
   className?: string;
   outline?: boolean;
+  radius?: string;
 };
 
 const Button: FC<ButtonProps> = ({
