@@ -18,6 +18,7 @@ const Wrapper = styled.section`
 
   .hidden {
     visibility: hidden;
+    height: 0;
   }
   .icon-close {
     position: absolute;

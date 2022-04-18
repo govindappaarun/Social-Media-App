@@ -21,12 +21,6 @@ export default function Post() {
     }
   }, []);
 
-  useEffect(() => {
-    if (image) {
-      // useCloudinary(image);
-    }
-  }, [image]);
-
   const clickFileInput = () => {
     if (fileInput.current) {
       fileInput.current.click();
@@ -60,12 +54,15 @@ export default function Post() {
         <RiEditLine /> Create Post
       </Header>
       <Box>
-        {image && <RiCloseLine className="icon-close" onClick={clearImage} />}
-        <Image
-          className="img-preview"
-          src={image ? URL.createObjectURL(image) : ""}
-          alt=" "
-        />
+        {image && (
+          <>
+            <Image
+              className="img-preview"
+              src={image ? URL.createObjectURL(image) : ""}
+              alt=" "
+            />
+          </>
+        )}
         <Input
           className="hidden"
           ref={fileInput}

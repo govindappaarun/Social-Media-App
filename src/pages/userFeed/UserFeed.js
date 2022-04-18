@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { RiSortAsc, RiSortDesc } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-import { Box } from "src/components";
+import { Box, Typography } from "src/components";
 import { LinkButton } from "src/components/Button";
 import { PostCard } from "src/components/Card";
 import PostsService from "src/services/postsService";
@@ -10,14 +10,14 @@ import { useSortFeed } from "./hook";
 export default function UserFeed() {
   const [posts, setPosts] = useState(null);
   const navigate = useNavigate();
-  const [sortBy, setSortBy] = useState(null);
-  const [sortOrder, setSortOrder] = useState(null);
+  const [sortBy, setSortBy] = useState("date");
+  const [sortOrder, setSortOrder] = useState("asc");
 
   useEffect(() => {
     PostsService.getPosts().then((response) => setPosts(response.posts));
   }, []);
 
-  const sortedFeed = useSortFeed(posts, sortBy, sortOrder);
+  const sortedFeed = useSortFeed(posts, sortBy, sortOrder) || posts;
 
   const viewPost = ({ _id }) => {
     navigate(`/home/viewPost/${_id}`);
@@ -35,8 +35,7 @@ export default function UserFeed() {
 
   return (
     <div>
-      <div>UserFeed</div>
-      {/* add routes for sorting */}
+      <Typography variant="h2">UserFeed</Typography>
       <div>
         <Box display="flex">
           <LinkButton
