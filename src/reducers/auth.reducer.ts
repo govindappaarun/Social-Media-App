@@ -1,4 +1,5 @@
 export type User = {
+  _id: string;
   firtName: string;
   lastName: string;
   email: string;
@@ -21,11 +22,11 @@ type Action =
 export const authReducer = (state: AuthState, { type, payload }: Action) => {
   switch (type) {
     case "DO_LOGIN":
-      const { firstName, lastName, email } = payload;
+      const { firstName, lastName, email, _id } = payload;
       return {
         ...state,
         isLoggedIn: true,
-        user: { firstName, lastName, email },
+        user: { firstName, lastName, email, _id },
       };
 
     case "DO_LOGOUT":
