@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import { NavBar, Typography } from "src/components";
 import { LinkButton } from "src/components/Button";
 import Post from "src/components/Post";
+import Users from "../users";
 
 export default function Home() {
   return (
@@ -13,6 +14,7 @@ export default function Home() {
         </LinkButton>
       </NavBar>
       <Post />
+      <Users />
       <Outlet />
     </div>
   );
