@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Typography } from "src/components";
 import { useAuth } from "src/contexts";
 import UserService from "src/services/userService";
-import UserCard from "./UserCard";
+import UserCard from "./components/UserCard";
 import Wrapper from "./Users.styled";
 
 export default function Users() {
