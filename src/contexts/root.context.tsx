@@ -1,6 +1,8 @@
+import { Provider as ReduxProvider } from "react-redux";
 import { AuthProvider } from "./auth.context";
 import { ThemeProvider } from "./theme.context";
 import IconProvider from "./icon.context";
+import store from "../redux/store";
 
 interface Props {
   children: React.ReactNode;
@@ -8,11 +10,13 @@ interface Props {
 
 const Provider = ({ children }: Props) => {
   return (
-    <AuthProvider>
-      <ThemeProvider>
-        <IconProvider>{children}</IconProvider>
-      </ThemeProvider>
-    </AuthProvider>
+    <ReduxProvider store={store}>
+      <AuthProvider>
+        <ThemeProvider>
+          <IconProvider>{children}</IconProvider>
+        </ThemeProvider>
+      </AuthProvider>
+    </ReduxProvider>
   );
 };
 

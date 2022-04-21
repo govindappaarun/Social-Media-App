@@ -1,35 +1,39 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { Typography } from "src/components";
-import { useAuth } from "src/contexts";
-import UserService from "src/services/userService";
 import UserCard from "./components/UserCard";
 import Wrapper from "./Users.styled";
 
+import {
+  followAUser,
+  getAllUsers,
+  unfollowAUser,
+} from "src/redux/reducers/usersSlice";
+import { useAuth } from "src/contexts";
+import { useUserList } from "./redux/selectors";
+
 export default function Users() {
-  const [users, setUsers] = useState(null);
   const { authState } = useAuth();
+  const dispatch = useDispatch();
+  const users = useUserList();
 
   useEffect(() => {
-    UserService.getAllUsers().then((response) => {
-      setUsers(
-        response.users.filter((user) => user._id !== authState?.user?._id)
-      );
-    });
-  }, []);
+    dispatch(getAllUsers());
+  }, [dispatch]);
 
   const isUserFollowed = (user) => {
-    return user.followers.indexOf(authState.user?._id) >= 0;
+    return user.followers.find(
+      ({ firstName, lastName }) =>
+        firstName === authState.user?.firstName &&
+        lastName === authState.user?.lastName
+    );
   };
 
   const onFollowUser = (user, isFollowed) => {
     if (isFollowed) {
-      UserService.unfollowUser(user._id).then(() => {
-        console.log("unfollowed");
-      });
+      dispatch(unfollowAUser(user));
     } else {
-      UserService.followUser(user._id).then(() => {
-        console.log("followed");
-      });
+      dispatch(followAUser(user));
     }
   };
 
