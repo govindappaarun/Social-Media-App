@@ -86,13 +86,13 @@ export const createPostHandler = function (schema, request) {
         likedBy: [],
         dislikedBy: [],
       },
-      comments: {},
+      comments: [],
       username: user.username,
       createdAt: formatDate(),
       updatedAt: formatDate(),
     };
     this.db.posts.insert(post);
-    return new Response(201, {}, { posts: this.db.posts });
+    return new Response(201, {}, { post: post });
   } catch (error) {
     return new Response(
       500,
