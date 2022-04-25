@@ -37,6 +37,22 @@ const PostsService = {
       throw error;
     }
   },
+  likeAPost: async (postId) => {
+    try {
+      const response = await Api.post(`/api/posts/like/${postId}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  disLikeAPost: async (postId) => {
+    try {
+      const response = await Api.post(`/api/posts/dislike/${postId}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default PostsService;

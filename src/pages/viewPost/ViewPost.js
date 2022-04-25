@@ -24,10 +24,24 @@ export default function ViewPost() {
     }).then((response) => console.log({ response }));
   };
 
+  const onLikeAPost = () => {
+    PostsService.likeAPost(postId).then((response) => {
+      console.log("liked");
+    });
+  };
+
+  const onDisLikeAPost = () => {
+    PostsService.disLikeAPost(postId).then((response) => {
+      console.log("disliked");
+    });
+  };
+
   return (
     <div>
       <Typography variant="h2">Viewing Post</Typography>
-      {post && <PostCard post={post} />}
+      {post && (
+        <PostCard post={post} doLike={onLikeAPost} doDisLike={onDisLikeAPost} />
+      )}
       <Typography>Comments</Typography>
       {post?.comments?.length}
       {post &&
