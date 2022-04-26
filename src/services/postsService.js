@@ -53,6 +53,22 @@ const PostsService = {
       throw error;
     }
   },
+  bookmarkAPost: async (postId) => {
+    try {
+      const response = await Api.post(`/api/users/bookmark/${postId}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+  removeBookmark: async (postId) => {
+    try {
+      const response = await Api.post(`/api/users/remove-bookmark/${postId}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default PostsService;

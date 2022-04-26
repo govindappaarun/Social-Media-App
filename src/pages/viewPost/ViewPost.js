@@ -36,11 +36,29 @@ export default function ViewPost() {
     });
   };
 
+  const onBookmarkAPost = () => {
+    PostsService.bookmarkAPost(postId).then((response) => {
+      console.log("bookmarked");
+    });
+  };
+
+  const onRemoveBookmark = () => {
+    PostsService.removeBookmark(postId).then((response) => {
+      console.log("bookmark removed");
+    });
+  };
+
   return (
     <div>
       <Typography variant="h2">Viewing Post</Typography>
       {post && (
-        <PostCard post={post} doLike={onLikeAPost} doDisLike={onDisLikeAPost} />
+        <PostCard
+          post={post}
+          doLike={onLikeAPost}
+          doDisLike={onDisLikeAPost}
+          doBookmark={onBookmarkAPost}
+          doRemoveBookmark={onRemoveBookmark}
+        />
       )}
       <Typography>Comments</Typography>
       {post?.comments?.length}

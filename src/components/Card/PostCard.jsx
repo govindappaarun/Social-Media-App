@@ -18,11 +18,13 @@ export default function ({
   post,
   doLike = () => {},
   doDisLike = () => {},
+  doBookmark = () => {},
+  doRemoveBookmark = () => {},
   ...rest
 }) {
   const { authState } = useAuth();
 
-  const { mediaUrl, username, createdAt, likes } = post;
+  const { mediaUrl, username, createdAt, likes, bookmarks } = post;
 
   const isLikedByMe = () =>
     likes.likeCount &&
@@ -60,7 +62,7 @@ export default function ({
         <Icon>
           <RiMessage2Line />
         </Icon>
-        <Icon>
+        <Icon onClick={doBookmark}>
           <RiBookMarkLine />
         </Icon>
       </Footer>
