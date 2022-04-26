@@ -21,6 +21,9 @@ export default function Home() {
         <LinkButton color="primary" to="feed">
           My Feed
         </LinkButton>
+        <LinkButton color="primary" to="bookmarks">
+          My Bookmarks
+        </LinkButton>
       </NavBar>
       <Post />
       <Users />

@@ -1,4 +1,5 @@
 import { useRoutes } from "react-router-dom";
+import Bookmarks from "./pages/bookmarks";
 import Home from "./pages/home";
 import Login from "./pages/login";
 import SignUp from "./pages/singup";
@@ -32,7 +33,7 @@ const privateRoutes = [
       },
       {
         path: "bookmarks",
-        element: <div>Bookmarks Page</div>,
+        element: <Bookmarks />,
       },
       {
         path: "viewPost/:postId",
