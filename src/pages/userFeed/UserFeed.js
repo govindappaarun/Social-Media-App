@@ -17,6 +17,7 @@ export default function UserFeed() {
   const dispatch = useDispatch();
   const sortOrder = useSelector((state) => state.userFeed.sortOrder);
   const sortedFeed = useSelector((state) => state.userFeed.posts);
+  const bookmarks = useSelector((state) => state.users.bookmarks);
 
   useEffect(() => {
     dispatch(getAllPosts());
@@ -24,6 +25,10 @@ export default function UserFeed() {
 
   const viewPost = ({ _id }) => {
     navigate(`/home/viewPost/${_id}`);
+  };
+
+  const isBookmarked = (postId) => {
+    return bookmarks.some((bookmark) => bookmark._id === postId);
   };
 
   const onSortBy = (type) => {
@@ -71,7 +76,12 @@ export default function UserFeed() {
         </Box>
         {sortedFeed &&
           sortedFeed.map((post, index) => (
-            <PostCard post={post} key={index} onClick={() => viewPost(post)} />
+            <PostCard
+              post={post}
+              key={index}
+              onClick={() => viewPost(post)}
+              isBookmarked={isBookmarked}
+            />
           ))}
       </div>
     </div>

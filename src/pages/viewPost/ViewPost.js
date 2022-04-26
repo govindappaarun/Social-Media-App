@@ -5,22 +5,16 @@ import { Typography } from "src/components";
 import CommentCard from "src/components/Card/CommentCard";
 import PostCard from "src/components/Card/PostCard";
 import CommentBox from "src/components/CommentBox";
+import { usePost } from "src/redux";
+import { disLikeAPost, likeAPost } from "src/redux/reducers/postsSlice";
 import { doBookmark, doRemoveBookmark } from "src/redux/reducers/usersSlice";
 import PostsService from "src/services/postsService";
 
 export default function ViewPost() {
   const { postId } = useParams();
-  const [post, setPost] = useState(null);
   const dispatch = useDispatch();
   const bookmarks = useSelector((state) => state.users.bookmarks);
-
-  useEffect(() => {
-    if (postId) {
-      PostsService.getPost({ postId }).then((response) => {
-        setPost(response.post);
-      });
-    }
-  }, [postId]);
+  const post = usePost(postId);
 
   const onPostAComment = (comment) => {
     PostsService.createComment(postId, {
@@ -29,15 +23,11 @@ export default function ViewPost() {
   };
 
   const onLikeAPost = () => {
-    PostsService.likeAPost(postId).then((response) => {
-      console.log("liked");
-    });
+    dispatch(likeAPost(postId));
   };
 
   const onDisLikeAPost = () => {
-    PostsService.disLikeAPost(postId).then((response) => {
-      console.log("disliked");
-    });
+    dispatch(disLikeAPost(postId));
   };
 
   const onBookmarkAPost = () => {
@@ -66,7 +56,6 @@ export default function ViewPost() {
         />
       )}
       <Typography>Comments</Typography>
-      {post?.comments?.length}
       {post &&
         post.comments.map((comment, index) => (
           <CommentCard comment={comment} key={index} />
