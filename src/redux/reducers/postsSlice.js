@@ -6,8 +6,6 @@ const initialState = {
   posts: [],
   sortBy: null,
   sortOrder: null,
-  currentPost: [],
-  comments: [],
   loading: false,
 };
 
