@@ -9,7 +9,10 @@ export default function Bookmarks() {
 
   return (
     <Wrapper>
-      <Typography variant="h2">Bookmarks</Typography>
+      <Typography variant="h2">
+        {bookmarks.length === 0 && "No"} Bookmarks
+      </Typography>
+
       {bookmarks.map((bookmark) => (
         <PostCard post={bookmark} key={bookmark._id} />
       ))}

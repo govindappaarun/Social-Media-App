@@ -57,6 +57,9 @@ export default function ({
         </Icon>
         <Icon onClick={doLike}>
           <RiHeart2Line className={clsx({ active: isLikedByMe() })} />
+          <sub>
+            <small>{likes.likeCount > 0 ? likes.likeCount : ""}</small>
+          </sub>
         </Icon>
         <Icon onClick={doDisLike}>
           <RiDislikeLine className={clsx({ active: isDislikedByMe() })} />
