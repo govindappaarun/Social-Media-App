@@ -20,11 +20,12 @@ export default function ({
   doDisLike = () => {},
   doBookmark = () => {},
   doRemoveBookmark = () => {},
+  isBookmarked = () => {},
   ...rest
 }) {
   const { authState } = useAuth();
 
-  const { mediaUrl, username, createdAt, likes, bookmarks } = post;
+  const { mediaUrl, username, createdAt, likes, _id } = post;
 
   const isLikedByMe = () =>
     likes.likeCount &&
@@ -33,6 +34,7 @@ export default function ({
   const isDislikedByMe = () =>
     likes.dislikedBy.some((user) => user.username === authState.user.username);
 
+  const haveBookmarked = isBookmarked(_id);
   return (
     <StyledWrapper {...rest}>
       <Header>
@@ -62,8 +64,8 @@ export default function ({
         <Icon>
           <RiMessage2Line />
         </Icon>
-        <Icon onClick={doBookmark}>
-          <RiBookMarkLine />
+        <Icon onClick={haveBookmarked ? doRemoveBookmark : doBookmark}>
+          <RiBookMarkLine className={clsx({ active: haveBookmarked })} />
         </Icon>
       </Footer>
     </StyledWrapper>

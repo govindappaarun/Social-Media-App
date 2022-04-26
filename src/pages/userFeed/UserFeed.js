@@ -1,23 +1,28 @@
 import { useEffect, useMemo, useState } from "react";
 import { RiSortAsc, RiSortDesc } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Box, Typography } from "src/components";
 import { LinkButton } from "src/components/Button";
 import { PostCard } from "src/components/Card";
+import { getAllPosts } from "src/redux/reducers/postsSlice";
 import PostsService from "src/services/postsService";
 import { useSortFeed } from "./hook";
 
 export default function UserFeed() {
-  const [posts, setPosts] = useState(null);
+  // const [posts, setPosts] = useState(null);
   const navigate = useNavigate();
   const [sortBy, setSortBy] = useState("date");
   const [sortOrder, setSortOrder] = useState("asc");
+  const dispatch = useDispatch();
+  const sortedFeed = useSelector((state) => state.userFeed.posts);
 
   useEffect(() => {
-    PostsService.getPosts().then((response) => setPosts(response.posts));
+    // PostsService.getPosts().then((response) => setPosts(response.posts));
+    dispatch(getAllPosts());
   }, []);
 
-  const sortedFeed = useSortFeed(posts, sortBy, sortOrder) || posts;
+  // const sortedFeed = useSortFeed(posts, sortBy, sortOrder) || posts;
 
   const viewPost = ({ _id }) => {
     navigate(`/home/viewPost/${_id}`);

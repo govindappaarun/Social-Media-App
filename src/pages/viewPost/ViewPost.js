@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Typography } from "src/components";
 import CommentCard from "src/components/Card/CommentCard";
 import PostCard from "src/components/Card/PostCard";
 import CommentBox from "src/components/CommentBox";
+import { doBookmark, doRemoveBookmark } from "src/redux/reducers/usersSlice";
 import PostsService from "src/services/postsService";
 
 export default function ViewPost() {
   const { postId } = useParams();
   const [post, setPost] = useState(null);
+  const dispatch = useDispatch();
+  const bookmarks = useSelector((state) => state.users.bookmarks);
 
   useEffect(() => {
     if (postId) {
@@ -37,15 +41,15 @@ export default function ViewPost() {
   };
 
   const onBookmarkAPost = () => {
-    PostsService.bookmarkAPost(postId).then((response) => {
-      console.log("bookmarked");
-    });
+    dispatch(doBookmark(postId));
   };
 
   const onRemoveBookmark = () => {
-    PostsService.removeBookmark(postId).then((response) => {
-      console.log("bookmark removed");
-    });
+    dispatch(doRemoveBookmark(postId));
+  };
+
+  const isBookmarked = (postId) => {
+    return bookmarks.some((bookmark) => bookmark._id === postId);
   };
 
   return (
@@ -58,6 +62,7 @@ export default function ViewPost() {
           doDisLike={onDisLikeAPost}
           doBookmark={onBookmarkAPost}
           doRemoveBookmark={onRemoveBookmark}
+          isBookmarked={isBookmarked}
         />
       )}
       <Typography>Comments</Typography>
