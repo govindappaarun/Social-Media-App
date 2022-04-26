@@ -6,35 +6,37 @@ import { Box, Typography } from "src/components";
 import { LinkButton } from "src/components/Button";
 import { PostCard } from "src/components/Card";
 import { getAllPosts } from "src/redux/reducers/postsSlice";
-import PostsService from "src/services/postsService";
-import { useSortFeed } from "./hook";
+import {
+  sortByDate,
+  sortByTrending,
+  sortByRecent,
+} from "src/redux/reducers/postsSlice";
 
 export default function UserFeed() {
-  // const [posts, setPosts] = useState(null);
   const navigate = useNavigate();
-  const [sortBy, setSortBy] = useState("date");
-  const [sortOrder, setSortOrder] = useState("asc");
   const dispatch = useDispatch();
+  const sortOrder = useSelector((state) => state.userFeed.sortOrder);
   const sortedFeed = useSelector((state) => state.userFeed.posts);
 
   useEffect(() => {
-    // PostsService.getPosts().then((response) => setPosts(response.posts));
     dispatch(getAllPosts());
   }, []);
-
-  // const sortedFeed = useSortFeed(posts, sortBy, sortOrder) || posts;
 
   const viewPost = ({ _id }) => {
     navigate(`/home/viewPost/${_id}`);
   };
 
   const onSortBy = (type) => {
-    if (type === "date") {
-      setSortBy("date");
-      setSortOrder((order) => (order === "asc" ? "desc" : "asc"));
-    } else {
-      setSortBy(type);
-      setSortOrder(null);
+    switch (type) {
+      case "date":
+        dispatch(sortByDate(sortOrder === "asc" ? "desc" : "asc"));
+        break;
+      case "trending":
+        dispatch(sortByTrending());
+        break;
+      case "recent":
+        dispatch(sortByRecent());
+      default:
     }
   };
 

@@ -1,8 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import PostsService from "src/services/postsService";
+import { sortDate, sortRecent, sortTrending } from "./utils";
 
 const initialState = {
   posts: [],
+  sortBy: null,
+  sortOrder: null,
   currentPost: [],
   comments: [],
   loading: false,
@@ -15,7 +18,21 @@ export const getAllPosts = createAsyncThunk("posts/getAll", async () => {
 const postsSlice = createSlice({
   name: "posts",
   initialState,
-  reducers(builder) {},
+  reducers: {
+    sortByDate: (state, action) => {
+      state.sortBy = "Date";
+      state.sortOrder = action.payload;
+      state.posts = state.posts.sort(sortDate(state.sortOrder));
+    },
+    sortByTrending: (state) => {
+      state.sortBy = "Trending";
+      state.posts = state.posts.sort(sortTrending);
+    },
+    sortByRecent: (state) => {
+      state.sortBy = "Recent";
+      state.posts = state.posts.sort(sortRecent);
+    },
+  },
   extraReducers(builder) {
     builder
       .addCase(getAllPosts.pending, (state) => {
@@ -28,4 +45,6 @@ const postsSlice = createSlice({
   },
 });
 
-export default postsSlice.reducer;
+const { actions, reducer } = postsSlice;
+export const { sortByDate, sortByRecent, sortByTrending } = actions;
+export { actions, reducer as default };
