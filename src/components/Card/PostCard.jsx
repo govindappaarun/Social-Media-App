@@ -25,7 +25,7 @@ export default function ({
 }) {
   const { authState } = useAuth();
 
-  const { mediaUrl, username, createdAt, likes, _id } = post;
+  const { mediaUrl, username, createdAt, likes, comments, _id } = post;
 
   const isLikedByMe = () =>
     likes.likeCount &&
@@ -66,6 +66,9 @@ export default function ({
         </Icon>
         <Icon>
           <RiMessage2Line />
+          <sub>
+            <small>{comments.length > 0 ? comments.length : ""}</small>
+          </sub>
         </Icon>
         <Icon onClick={haveBookmarked ? doRemoveBookmark : doBookmark}>
           <RiBookMarkLine className={clsx({ active: haveBookmarked })} />
