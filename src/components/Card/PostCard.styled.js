@@ -26,8 +26,9 @@ const Footer = styled(Box)``;
 const Icon = styled.span(() => [
   css`
     font-size: 1.5rem;
-    &:hover {
-      color: red;
+    &:hover,
+    .active {
+      color: ${(p) => p.theme.error.main};
     }
   `,
 ]);

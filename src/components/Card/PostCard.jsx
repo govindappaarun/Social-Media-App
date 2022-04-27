@@ -1,4 +1,3 @@
-import React from "react";
 import Avatar from "../Avatar/Avatar";
 import Box from "../Box";
 import Image from "../Image";
@@ -8,13 +7,34 @@ import StyledWrapper, { Header, Footer, Main, Icon } from "./PostCard.styled";
 import {
   RiEyeLine,
   RiHeart2Line,
-  RiShareCircleLine,
   RiMessage2Line,
   RiBookMarkLine,
+  RiDislikeLine,
 } from "react-icons/ri";
+import { useAuth } from "src/contexts";
+import clsx from "clsx";
 
-export default function ({ post, ...rest }) {
-  const { mediaUrl, username, createdAt } = post;
+export default function ({
+  post,
+  doLike = () => {},
+  doDisLike = () => {},
+  doBookmark = () => {},
+  doRemoveBookmark = () => {},
+  isBookmarked = () => {},
+  ...rest
+}) {
+  const { authState } = useAuth();
+
+  const { mediaUrl, username, createdAt, likes, _id } = post;
+
+  const isLikedByMe = () =>
+    likes.likeCount &&
+    likes.likedBy.some((user) => user.username === authState.user.username);
+
+  const isDislikedByMe = () =>
+    likes.dislikedBy.some((user) => user.username === authState.user.username);
+
+  const haveBookmarked = isBookmarked(_id);
   return (
     <StyledWrapper {...rest}>
       <Header>
@@ -35,17 +55,20 @@ export default function ({ post, ...rest }) {
         <Icon>
           <RiEyeLine />
         </Icon>
-        <Icon>
-          <RiHeart2Line />
+        <Icon onClick={doLike}>
+          <RiHeart2Line className={clsx({ active: isLikedByMe() })} />
+          <sub>
+            <small>{likes.likeCount > 0 ? likes.likeCount : ""}</small>
+          </sub>
         </Icon>
-        <Icon>
-          <RiShareCircleLine />
+        <Icon onClick={doDisLike}>
+          <RiDislikeLine className={clsx({ active: isDislikedByMe() })} />
         </Icon>
         <Icon>
           <RiMessage2Line />
         </Icon>
-        <Icon>
-          <RiBookMarkLine />
+        <Icon onClick={haveBookmarked ? doRemoveBookmark : doBookmark}>
+          <RiBookMarkLine className={clsx({ active: haveBookmarked })} />
         </Icon>
       </Footer>
     </StyledWrapper>

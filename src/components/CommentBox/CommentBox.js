@@ -26,7 +26,7 @@ export default function CommentBox({
         placeholder={placeholder || "Add how you feel about this"}
       />
       <Button color="secondary" radius="4px" onClick={onPostComment}>
-        Save
+        Post
       </Button>
     </Wrapper>
   );
