@@ -27,9 +27,11 @@ export default function Home() {
         <LinkButton color="primary" to="bookmarks">
           My Bookmarks
         </LinkButton>
+        <LinkButton color="primary" to="users">
+          Users
+        </LinkButton>
       </NavBar>
       <Post />
-      <Users />
       <Outlet />
     </div>
   );
