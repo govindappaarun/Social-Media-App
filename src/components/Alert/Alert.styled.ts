@@ -19,10 +19,10 @@ export const StyledAlert = styled.div(({ color }) => [
     font-size: 1.2rem;
     color: white;
     display: inline-flex;
-    align-items: start;
+    align-items: center;
     width: 25rem;
     gap: 0.5rem;
-    animation: ${appear} 0.5s linear;
+    animation: ${appear} 0.3s linear;
     position: absolute;
     bottom: 20px;
     right: 0;
@@ -32,22 +32,28 @@ export const StyledAlert = styled.div(({ color }) => [
   `,
   color === "primary" &&
     css`
-      background-color: #1565c0;
+      background-color: ${(p) => p.theme.primary.main};
     `,
   color === "secondary" &&
     css`
-      background-color: #25b160;
+      background-color: ${(p) => p.theme.secondary.main};
     `,
   color === "warning" &&
     css`
-      background-color: #1565c0;
+      background-color: ${(p) => p.theme.warning.main};
     `,
   color === "success" &&
     css`
-      background-color: #ff4238;
+      background-color: ${(p) => p.theme.success.main};
     `,
   color === "error" &&
     css`
-      background-color: #1565c0;
+      background-color: ${(p) => p.theme.error.main};
     `,
 ]);
+
+export const StyledContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
