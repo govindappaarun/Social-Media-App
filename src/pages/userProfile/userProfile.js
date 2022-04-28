@@ -3,6 +3,7 @@ import { HiOutlineCamera } from "react-icons/hi";
 import { useParams } from "react-router-dom";
 import { Box, Image, Input, Typography } from "src/components";
 import { PostCard } from "src/components/Card";
+import { useAuth } from "src/contexts";
 import apiCloudinary from "src/hooks/useCloudinary";
 import PostsService from "src/services/postsService";
 import UserService from "src/services/userService";
@@ -13,9 +14,11 @@ export default function UserProfile() {
   const [posts, setPosts] = useState(null);
   const [image, setImage] = useState(null);
   const [wallpaper, setWallpaper] = useState(null);
+  const [isEditable, setIsEditable] = useState(false);
   const fileInput = useRef(null);
   const fileInput2 = useRef(null);
   const { userId } = useParams();
+  const { authState } = useAuth();
 
   useEffect(() => {
     let user;
@@ -29,7 +32,11 @@ export default function UserProfile() {
     PostsService.getMyPosts(user ? user.username : userId).then((response) => {
       setPosts(response.posts);
     });
-  }, []);
+    setIsEditable(
+      (user && user.username === authState.user.username) ||
+        userId === authState.user.username
+    );
+  }, [userId]);
 
   useEffect(() => {
     if (image) {
@@ -86,7 +93,9 @@ export default function UserProfile() {
             {userProfile.wallpaper && (
               <Image className="img-responsive" src={userProfile.wallpaper} />
             )}
-            <HiOutlineCamera className="camera" onClick={clickFileInput2} />
+            {isEditable && (
+              <HiOutlineCamera className="camera" onClick={clickFileInput2} />
+            )}
           </Box>
           <Box display="flex" wrap="wrap" gap="lg">
             <Box>
@@ -103,7 +112,12 @@ export default function UserProfile() {
                   src={userProfile.avatar || "/default-profile.jpg"}
                   alt="Profile Pic"
                 />
-                <HiOutlineCamera className="camera" onClick={clickFileInput} />
+                {isEditable && (
+                  <HiOutlineCamera
+                    className="camera"
+                    onClick={clickFileInput}
+                  />
+                )}
               </Box>
               <Input
                 className="hidden"
@@ -123,7 +137,7 @@ export default function UserProfile() {
               <Typography variant="h4">
                 Bio: {userProfile.bio || "Add your bio here"}
               </Typography>
-
+              {isEditable && <span>edit</span>}
               <Typography variant="h3">{userProfile.email}</Typography>
               <Typography
                 variant="h3"
