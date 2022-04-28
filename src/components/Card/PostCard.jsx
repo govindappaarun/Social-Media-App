@@ -13,6 +13,7 @@ import {
 } from "react-icons/ri";
 import { useAuth } from "src/contexts";
 import clsx from "clsx";
+import { useNavigate } from "react-router-dom";
 
 export default function ({
   post,
@@ -23,6 +24,7 @@ export default function ({
   isBookmarked = () => {},
   ...rest
 }) {
+  const navigate = useNavigate();
   const { authState } = useAuth();
 
   const { mediaUrl, username, createdAt, likes, comments, _id } = post;
@@ -35,11 +37,22 @@ export default function ({
     likes.dislikedBy.some((user) => user.username === authState.user.username);
 
   const haveBookmarked = isBookmarked(_id);
+
+  const navigateToProfile = (e) => {
+    e.stopPropagation();
+    navigate(`/home/profile/${username}`);
+  };
   return (
     <StyledWrapper {...rest}>
       <Header>
         <Box display="flex" alignItems="center" gap="sm">
-          <Avatar size="sm" type="span" text="AG"></Avatar>
+          <Avatar
+            size="sm"
+            type="span"
+            text="AG"
+            className="avatar"
+            onClick={navigateToProfile}
+          />
           <Box>
             <Typography variant="span" as="span">
               {username}

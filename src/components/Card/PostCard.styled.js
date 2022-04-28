@@ -10,6 +10,9 @@ const StyledWrapper = styled.section(({ theme }) => [
     flex-direction: column;
     gap: 0.5rem;
     box-shadow: 0px 2px 4px ${theme.background.bg10};
+    .avatar {
+      cursor: pointer;
+    }
   `,
 ]);
 

@@ -7,6 +7,7 @@ export const StyledBox = styled.div<BoxProps>`
   display: ${(p) => p.display || "block"};
   position: ${(p) => p.position || "relative"};
   flex-direction: ${(p) => p.direction || "row"};
+  flex-wrap: ${(p) => p.wrap || "no-wrap"};
 
   gap: ${(p) => (p.gap ? Size[p.gap] : 0)};
   justify-content: ${(p) => p.justifyContent || "start"};

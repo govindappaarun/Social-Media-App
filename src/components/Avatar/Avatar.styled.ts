@@ -2,13 +2,18 @@ import styled, { css } from "styled-components";
 import { AvatarProps } from "./Avatar";
 
 export const StyledAvatar = styled.span<AvatarProps>`
+  border-radius: 100%;
   border: 1px solid ${(p) => p.theme.primary.main};
   padding: 5px;
-  border-radius: 100%;
-  object-fit: cover;
-  width: 4rem;
-  height: 4rem;
   flex-shrink: 0;
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    max-width: 7.5rem;
+    max-height: 7.5rem;
+  }
 
   ${(p) =>
     p.type === "span" &&

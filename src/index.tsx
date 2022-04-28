@@ -5,12 +5,14 @@ import reportWebVitals from "./reportWebVitals";
 import { makeServer } from "./server";
 import Provider from "./contexts";
 import "./index.css";
+import { GlobalStyle } from "./theme/globalStyle";
 
 makeServer();
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider>
+      <GlobalStyle />
       <App />
     </Provider>
   </React.StrictMode>,
