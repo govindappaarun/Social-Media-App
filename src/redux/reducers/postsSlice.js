@@ -21,6 +21,15 @@ export const disLikeAPost = createAsyncThunk("post/dislike", async (postId) => {
   return PostsService.disLikeAPost(postId);
 });
 
+export const postAComment = createAsyncThunk(
+  "post/comment",
+  async ({ postId, comment }) => {
+    return await PostsService.createComment(postId, {
+      commentData: { content: comment },
+    });
+  }
+);
+
 const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -52,6 +61,9 @@ const postsSlice = createSlice({
         state.posts = action.payload.posts;
       })
       .addCase(disLikeAPost.fulfilled, (state, action) => {
+        state.posts = action.payload.posts;
+      })
+      .addCase(postAComment.fulfilled, (state, action) => {
         state.posts = action.payload.posts;
       });
   },

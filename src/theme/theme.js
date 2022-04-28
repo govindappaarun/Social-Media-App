@@ -15,8 +15,8 @@ const light = {
     contrast: "#FFFFFF",
   },
   success: {
-    main: "#FF4238",
-    text: "#12DE67",
+    main: "#25B160",
+    text: "#0C75AF",
     contrast: "#FFFFFF",
   },
   text: {

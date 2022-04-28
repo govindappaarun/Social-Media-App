@@ -1,4 +1,6 @@
 import Avatar from "./Avatar/Avatar";
+import Alert from "./Alert";
+import AlertContainer from "./Alert/Alert.Container";
 import Badge from "./Badge";
 import Box from "./Box";
 import Button from "./Button";
@@ -12,6 +14,8 @@ import Typography from "./Typography";
 
 export {
   Avatar,
+  Alert,
+  AlertContainer,
   Badge,
   Box,
   Button,

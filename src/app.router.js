@@ -4,6 +4,7 @@ import Home from "./pages/home";
 import Login from "./pages/login";
 import SignUp from "./pages/singup";
 import UserFeed from "./pages/userFeed";
+import Users from "./pages/users";
 import ViewPost from "./pages/viewPost";
 import Welcome from "./pages/welcome";
 import SecureRoute from "./SecureRoute";
@@ -34,6 +35,10 @@ const privateRoutes = [
       {
         path: "bookmarks",
         element: <Bookmarks />,
+      },
+      {
+        path: "users",
+        element: <Users />,
       },
       {
         path: "viewPost/:postId",

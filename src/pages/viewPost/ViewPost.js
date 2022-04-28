@@ -6,7 +6,11 @@ import CommentCard from "src/components/Card/CommentCard";
 import PostCard from "src/components/Card/PostCard";
 import CommentBox from "src/components/CommentBox";
 import { usePost } from "src/redux";
-import { disLikeAPost, likeAPost } from "src/redux/reducers/postsSlice";
+import {
+  disLikeAPost,
+  likeAPost,
+  postAComment,
+} from "src/redux/reducers/postsSlice";
 import { doBookmark, doRemoveBookmark } from "src/redux/reducers/usersSlice";
 import PostsService from "src/services/postsService";
 
@@ -17,9 +21,7 @@ export default function ViewPost() {
   const post = usePost(postId);
 
   const onPostAComment = (comment) => {
-    PostsService.createComment(postId, {
-      commentData: { content: comment },
-    }).then((response) => console.log({ response }));
+    dispatch(postAComment({ postId, comment }));
   };
 
   const onLikeAPost = () => {
