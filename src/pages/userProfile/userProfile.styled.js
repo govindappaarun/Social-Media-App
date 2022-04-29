@@ -8,7 +8,6 @@ export const Wrapper = styled.div`
     padding: 5px;
   }
   .wallpaper {
-    pointer-events: none;
     height: 15rem;
     background: linear-gradient(
       90deg,

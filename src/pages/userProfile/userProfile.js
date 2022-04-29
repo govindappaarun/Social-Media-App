@@ -99,13 +99,6 @@ export default function UserProfile() {
           </Box>
           <Box display="flex" wrap="wrap" gap="lg">
             <Box>
-              {image && (
-                <Image
-                  className="img-preview"
-                  src={image ? URL.createObjectURL(image) : ""}
-                  alt="Pick an Image"
-                />
-              )}
               <Box className="profile-pic">
                 <Image
                   className="img-preview"
