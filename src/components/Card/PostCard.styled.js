@@ -3,6 +3,7 @@ import Box from "../Box";
 
 const StyledWrapper = styled.section(({ theme }) => [
   css`
+    max-width: 25rem;
     border: 1px solid ${theme.background.bg05};
     border-radius: 4px;
     padding: 5px 0px;
