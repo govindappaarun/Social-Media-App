@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Button, Typography } from "src/components";
+import { Avatar, Button, Image, Typography } from "src/components";
 import { User } from "../Users.styled";
 
 export default function UserCard({
@@ -11,7 +11,10 @@ export default function UserCard({
 }) {
   return (
     <User display="flex" gap="sm" alignItems="center" {...rest}>
-      <Avatar type="span" size="sm" text={avatarText} />
+      <Image
+        className="img-responsive img-round"
+        src={user.avatar || "/default-profile.jpg"}
+      />
       <Typography>
         {user.firstName} {user.lastName}
       </Typography>

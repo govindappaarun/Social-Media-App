@@ -12,6 +12,10 @@ export const users = [
     lastName: "Balika",
     username: "adarshbalika",
     password: "adarshBalika123",
+    wallpaper:
+      "https://res.cloudinary.com/db9adijl0/image/upload/v1651118071/profile/nature2_ah1qk7.jpg",
+    avatar:
+      "https://res.cloudinary.com/db9adijl0/image/upload/v1651199654/profile/images_xm5o4a.jpg",
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },

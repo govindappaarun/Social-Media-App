@@ -19,6 +19,9 @@ const StyledWrapper = styled.section(({ theme }) => [
 const Header = styled.header(({ theme }) => [
   css`
     padding: 5px;
+    .img-round {
+      width: 4rem;
+    }
   `,
 ]);
 

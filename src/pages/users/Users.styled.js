@@ -5,6 +5,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  .img-round {
+    width: 4rem;
+  }
 `;
 
 const User = styled(Box)`

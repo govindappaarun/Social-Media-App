@@ -14,6 +14,7 @@ import {
 import { useAuth } from "src/contexts";
 import clsx from "clsx";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function ({
   post,
@@ -26,7 +27,7 @@ export default function ({
 }) {
   const navigate = useNavigate();
   const { authState } = useAuth();
-
+  const users = useSelector((state) => state.users.users);
   const { mediaUrl, username, createdAt, likes, comments, _id } = post;
 
   const isLikedByMe = () =>
@@ -38,31 +39,40 @@ export default function ({
 
   const haveBookmarked = isBookmarked(_id);
 
+  const getProfilePic = (username) => {
+    let found = users.find((user) => user.username === username);
+    return (found && found.avatar) || "/default-profile.jpg";
+  };
+
+  const getUserFullName = (username) => {
+    let found = users.find((user) => user.username === username);
+    return found && `${found.firstName} ${found.lastName}`;
+  };
+
   const navigateToProfile = (e) => {
     e.stopPropagation();
     navigate(`/home/profile/${username}`);
   };
+
   return (
     <StyledWrapper {...rest}>
       <Header>
-        <Box display="flex" alignItems="center" gap="sm">
-          <Avatar
-            size="sm"
-            type="span"
-            text="AG"
-            className="avatar"
+        <Box display="flex" alignItems="center">
+          <Image
+            src={getProfilePic(username)}
+            className="img-responsive img-round"
             onClick={navigateToProfile}
           />
           <Box>
-            <Typography variant="span" as="span">
-              {username}
+            <Typography variant="h3">{getUserFullName(username)}</Typography>
+            <Typography variant="span">
+              Published: {new Date(createdAt).toDateString()}
             </Typography>
-            <Typography variant="span">Published {createdAt}</Typography>
           </Box>
         </Box>
       </Header>
       <Main>
-        <Image src={mediaUrl} alt="profile" />
+        <Image className="img-responsive" src={mediaUrl} alt="profile" />
       </Main>
       <Footer display="flex" gap="md">
         <Icon>

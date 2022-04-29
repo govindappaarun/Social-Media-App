@@ -86,7 +86,7 @@ export const posts = [
     comments: [],
     mediaUrl:
       "https://res.cloudinary.com/db9adijl0/image/upload/v1647968621/ecomm-assets/course-2_mnssso.jpg",
-    username: "shubhamsoni",
+    username: "adarshbalika",
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -103,7 +103,7 @@ export const posts = [
     comments: [],
     mediaUrl:
       "https://res.cloudinary.com/db9adijl0/image/upload/v1647968622/ecomm-assets/course-1_pi9q9e.jpg",
-    username: "shubhamsoni",
+    username: "adarshbalika",
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },

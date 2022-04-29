@@ -74,15 +74,17 @@ export default function UserFeed() {
             Recent
           </LinkButton>
         </Box>
-        {sortedFeed &&
-          sortedFeed.map((post, index) => (
-            <PostCard
-              post={post}
-              key={index}
-              onClick={() => viewPost(post)}
-              isBookmarked={isBookmarked}
-            />
-          ))}
+        <Box display="flex" wrap="wrap" gap="md">
+          {sortedFeed &&
+            sortedFeed.map((post, index) => (
+              <PostCard
+                post={post}
+                key={index}
+                onClick={() => viewPost(post)}
+                isBookmarked={isBookmarked}
+              />
+            ))}
+        </Box>
       </div>
     </div>
   );
