@@ -11,6 +11,7 @@ import {
   sortByTrending,
   sortByRecent,
 } from "src/redux/reducers/postsSlice";
+import { Wrapper } from "./UserFeed.styled";
 
 export default function UserFeed() {
   const navigate = useNavigate();
@@ -46,46 +47,44 @@ export default function UserFeed() {
   };
 
   return (
-    <div>
+    <Wrapper display="flex" direction="column" gap="md">
       <Typography variant="h2">UserFeed</Typography>
-      <div>
-        <Box display="flex">
-          <LinkButton
-            to={`/home/feed/date`}
-            color="warning"
-            onClick={() => onSortBy("date")}
-          >
-            {sortOrder === "asc" && <RiSortAsc />}
-            {sortOrder === "desc" && <RiSortDesc />}
-            Sort by Date
-          </LinkButton>
-          <LinkButton
-            to={`/home/feed/trending`}
-            onClick={() => onSortBy("trending")}
-            color="error"
-          >
-            Trending
-          </LinkButton>
-          <LinkButton
-            to={`/home/feed/recent`}
-            onClick={() => onSortBy("recent")}
-            color="secondary"
-          >
-            Recent
-          </LinkButton>
-        </Box>
-        <Box display="flex" wrap="wrap" gap="md">
-          {sortedFeed &&
-            sortedFeed.map((post, index) => (
-              <PostCard
-                post={post}
-                key={index}
-                onClick={() => viewPost(post)}
-                isBookmarked={isBookmarked}
-              />
-            ))}
-        </Box>
-      </div>
-    </div>
+      <Box display="flex">
+        <LinkButton
+          to={`/home/feed/date`}
+          color="warning"
+          onClick={() => onSortBy("date")}
+        >
+          {sortOrder === "asc" && <RiSortAsc />}
+          {sortOrder === "desc" && <RiSortDesc />}
+          Sort by Date
+        </LinkButton>
+        <LinkButton
+          to={`/home/feed/trending`}
+          onClick={() => onSortBy("trending")}
+          color="error"
+        >
+          Trending
+        </LinkButton>
+        <LinkButton
+          to={`/home/feed/recent`}
+          onClick={() => onSortBy("recent")}
+          color="secondary"
+        >
+          Recent
+        </LinkButton>
+      </Box>
+      <Box display="flex" wrap="wrap" gap="md">
+        {sortedFeed &&
+          sortedFeed.map((post, index) => (
+            <PostCard
+              post={post}
+              key={index}
+              onClick={() => viewPost(post)}
+              isBookmarked={isBookmarked}
+            />
+          ))}
+      </Box>
+    </Wrapper>
   );
 }

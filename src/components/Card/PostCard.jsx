@@ -74,7 +74,12 @@ export default function ({
       <Main>
         <Image className="img-responsive" src={mediaUrl} alt="profile" />
       </Main>
-      <Footer display="flex" gap="md">
+      <Footer
+        display="flex"
+        gap="md"
+        justifyContent="space-around"
+        alignItems="center"
+      >
         <Icon>
           <RiEyeLine />
         </Icon>
