@@ -35,7 +35,7 @@ export const posts = [
     comments: [],
     mediaUrl:
       "https://res.cloudinary.com/db9adijl0/image/upload/v1647968621/ecomm-assets/course-5_a10cjy.jpg",
-    username: "shubhamsoni",
+    username: "arun",
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -52,7 +52,7 @@ export const posts = [
     comments: [],
     mediaUrl:
       "https://res.cloudinary.com/db9adijl0/image/upload/v1647968621/ecomm-assets/course-4_dd2erl.jpg",
-    username: "shubhamsoni",
+    username: "arun",
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -69,7 +69,7 @@ export const posts = [
     comments: [],
     mediaUrl:
       "https://res.cloudinary.com/db9adijl0/image/upload/v1647968622/ecomm-assets/course-1_pi9q9e.jpg",
-    username: "shubhamsoni",
+    username: "arun",
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -86,7 +86,7 @@ export const posts = [
     comments: [],
     mediaUrl:
       "https://res.cloudinary.com/db9adijl0/image/upload/v1647968621/ecomm-assets/course-2_mnssso.jpg",
-    username: "shubhamsoni",
+    username: "adarshbalika",
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
@@ -103,7 +103,7 @@ export const posts = [
     comments: [],
     mediaUrl:
       "https://res.cloudinary.com/db9adijl0/image/upload/v1647968622/ecomm-assets/course-1_pi9q9e.jpg",
-    username: "shubhamsoni",
+    username: "adarshbalika",
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },

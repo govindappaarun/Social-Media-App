@@ -23,6 +23,7 @@ export const GlobalStyle = createGlobalStyle`
 
   .icon {
     margin: 0.2 rem;
+    cursor: pointer;
   }
   
   .fs-1 {

@@ -15,17 +15,13 @@ export default function Avatar({
   type,
   size,
   className,
+  src,
+  alt,
   ...rest
 }: AvatarProps) {
-  const element = type ? type : "span";
   return (
-    <StyledAvatar
-      as={element}
-      type={type}
-      className={clsx(size, className)}
-      {...rest}
-    >
-      {text}
+    <StyledAvatar type={type} className={clsx(size, className)} {...rest}>
+      {type === "span" ? text : <img src={src} alt={alt} />}
     </StyledAvatar>
   );
 }

@@ -5,6 +5,7 @@ import Login from "./pages/login";
 import SignUp from "./pages/singup";
 import UserFeed from "./pages/userFeed";
 import Users from "./pages/users";
+import UserProfile from "./pages/userProfile";
 import ViewPost from "./pages/viewPost";
 import Welcome from "./pages/welcome";
 import SecureRoute from "./SecureRoute";
@@ -46,7 +47,7 @@ const privateRoutes = [
       },
       {
         path: "profile/:userId",
-        element: <div>Profile of given user</div>,
+        element: <UserProfile />,
       },
     ],
   },

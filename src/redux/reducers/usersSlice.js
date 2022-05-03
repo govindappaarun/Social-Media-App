@@ -59,7 +59,7 @@ const usersSlice = createSlice({
   extraReducers(builder) {
     builder
       .addCase(getAllUsers.fulfilled, (state, action) => {
-        state.users = state.users.concat(action.payload.users);
+        state.users = action.payload.users;
       })
       .addCase(getBookmarks.fulfilled, updateBookmarks)
       .addCase(doBookmark.fulfilled, updateBookmarks)

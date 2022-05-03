@@ -57,6 +57,14 @@ const UserService = {
       throw error;
     }
   },
+  editUser: async (userData) => {
+    try {
+      const response = await Api.post("/api/users/edit", { userData });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default UserService;

@@ -8,7 +8,7 @@ export default function Bookmarks() {
   const bookmarks = useSelector((state) => state.users.bookmarks);
 
   return (
-    <Wrapper>
+    <Wrapper display="flex" direction="column" gap="md">
       <Typography variant="h2">
         {bookmarks.length === 0 && "No"} Bookmarks
       </Typography>

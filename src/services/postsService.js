@@ -18,6 +18,15 @@ const PostsService = {
     }
   },
 
+  getMyPosts: async (username) => {
+    try {
+      const response = await Api.get(`/api/posts/user/${username}`);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   createPost: async (post) => {
     try {
       const response = await Api.post("/api/posts", { ...post });
