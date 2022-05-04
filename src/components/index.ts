@@ -8,6 +8,7 @@ import Card from "./Card";
 import Checkbox from "./Checkbox";
 import Image from "./Image";
 import Input from "./Input";
+import Modal from "./Modal";
 import NavBar from "./Navbar";
 import Rating from "./Rating";
 import Typography from "./Typography";
@@ -23,6 +24,7 @@ export {
   Checkbox,
   Image,
   Input,
+  Modal,
   NavBar,
   Rating,
   Typography,
