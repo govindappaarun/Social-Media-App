@@ -1,13 +1,13 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { NavBar } from "src/components";
 import { LinkButton } from "src/components/Button";
 import { getAllUsers, getBookmarks } from "src/redux/reducers/usersSlice";
+import CreatePost from "./components/CreatePost";
 
 export default function Home() {
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(getBookmarks());
     dispatch(getAllUsers());
@@ -29,6 +29,7 @@ export default function Home() {
           Profile
         </LinkButton>
       </NavBar>
+      <CreatePost />
       <Outlet />
     </div>
   );

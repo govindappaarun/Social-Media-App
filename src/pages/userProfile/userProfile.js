@@ -1,18 +1,21 @@
 import { useEffect, useRef, useState } from "react";
 import { HiOutlineCamera } from "react-icons/hi";
 import { RiEdit2Line } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { Box, Image, Input, Modal, Typography } from "src/components";
 import { PostCard } from "src/components/Card";
 import { useAuth } from "src/contexts";
 import apiCloudinary from "src/hooks/useCloudinary";
+import { editUserProfile, getUserProfile } from "src/redux/reducers/usersSlice";
 import PostsService from "src/services/postsService";
 import UserService from "src/services/userService";
+import { useCurrentUser } from "../users/redux/selectors";
 import EditProfile from "./components/EditProfile";
 import { Wrapper } from "./userProfile.styled";
 
 export default function UserProfile() {
-  const [userProfile, setUserProfile] = useState(null);
+  // const [userProfile, setUserProfile] = useState(null);
   const [posts, setPosts] = useState(null);
   const [image, setImage] = useState(null);
   const [wallpaper, setWallpaper] = useState(null);
@@ -22,19 +25,20 @@ export default function UserProfile() {
   const fileInput2 = useRef(null);
   const { userId } = useParams();
   const { authState } = useAuth();
+  const dispatch = useDispatch();
+  const userProfile = useCurrentUser();
 
   useEffect(() => {
     let user;
     if (userId && userId === "me") {
       user = JSON.parse(localStorage.getItem("user"));
     }
-    UserService.getUser(user ? user.username : userId).then((response) => {
-      setUserProfile(response.user);
-    });
+    dispatch(getUserProfile(user ? user.username : userId));
 
     PostsService.getMyPosts(user ? user.username : userId).then((response) => {
       setPosts(response.posts);
     });
+
     setIsEditable(
       (user && user.username === authState.user.username) ||
         userId === authState.user.username
@@ -93,13 +97,9 @@ export default function UserProfile() {
   };
 
   const saveProfile = (values) => {
-    UserService.editUser(values)
-      .then((response) => {
-        setIsEditing(false);
-      })
-      .catch(() => {
-        console.log("Problem editing profile details");
-      });
+    dispatch(editUserProfile(values)).then(() => {
+      setIsEditing(false);
+    });
   };
 
   return (

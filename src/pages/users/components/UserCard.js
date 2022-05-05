@@ -1,5 +1,5 @@
 import React from "react";
-import { Avatar, Button, Image, Typography } from "src/components";
+import { Button, Image, Typography } from "src/components";
 import { User } from "../Users.styled";
 
 export default function UserCard({
