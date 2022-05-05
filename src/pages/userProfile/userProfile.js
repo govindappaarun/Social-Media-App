@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import { HiOutlineCamera } from "react-icons/hi";
+import { RiEdit2Line } from "react-icons/ri";
 import { useParams } from "react-router-dom";
-import { Box, Image, Input, Typography } from "src/components";
+import { Box, Image, Input, Modal, Typography } from "src/components";
 import { PostCard } from "src/components/Card";
 import { useAuth } from "src/contexts";
 import apiCloudinary from "src/hooks/useCloudinary";
 import PostsService from "src/services/postsService";
 import UserService from "src/services/userService";
+import EditProfile from "./components/EditProfile";
 import { Wrapper } from "./userProfile.styled";
 
 export default function UserProfile() {
@@ -15,6 +17,7 @@ export default function UserProfile() {
   const [image, setImage] = useState(null);
   const [wallpaper, setWallpaper] = useState(null);
   const [isEditable, setIsEditable] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const fileInput = useRef(null);
   const fileInput2 = useRef(null);
   const { userId } = useParams();
@@ -85,6 +88,20 @@ export default function UserProfile() {
     });
   }
 
+  const editProfile = () => {
+    setIsEditing(true);
+  };
+
+  const saveProfile = (values) => {
+    UserService.editUser(values)
+      .then((response) => {
+        setIsEditing(false);
+      })
+      .catch(() => {
+        console.log("Problem editing profile details");
+      });
+  };
+
   return (
     <Wrapper>
       {userProfile && (
@@ -130,7 +147,7 @@ export default function UserProfile() {
               <Typography variant="h4">
                 Bio: {userProfile.bio || "Add your bio here"}
               </Typography>
-              {isEditable && <span>edit</span>}
+              {isEditable && <RiEdit2Line onClick={() => editProfile()} />}
               <Typography variant="h3">{userProfile.email}</Typography>
               <Typography
                 variant="h3"
@@ -138,9 +155,16 @@ export default function UserProfile() {
                 href={userProfile.profile}
                 color="primary"
               >
-                {userProfile.github}
+                {userProfile.profileUrl}
               </Typography>
             </Box>
+            <Modal
+              open={isEditing}
+              onClose={() => setIsEditing(false)}
+              className="profile-modal"
+            >
+              <EditProfile profile={userProfile} onSaveprofile={saveProfile} />
+            </Modal>
             <Box className="posts-section">
               <Typography variant="h2" className="heading">
                 My Posts ( {posts && posts.length} )

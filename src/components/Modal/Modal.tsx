@@ -26,8 +26,8 @@ function Modal({ open, onClose, children, ...rest }: ModalProps) {
     return null;
   }
   return createPortal(
-    <Wrapper {...rest}>
-      <Main display="flex" direction="column">
+    <Wrapper className="modal-overlay" {...rest}>
+      <Main display="flex" direction="column" className="modal">
         <Header>
           <RiCloseLine className="close" onClick={onClose} />
         </Header>
