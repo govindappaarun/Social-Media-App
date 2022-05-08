@@ -26,7 +26,12 @@ const Header = styled.header(({ theme }) => [
   `,
 ]);
 
-const Main = styled.main``;
+const Main = styled.main`
+  img {
+    min-height: 15rem;
+    max-height: 15rem;
+  }
+`;
 
 const Footer = styled(Box)``;
 

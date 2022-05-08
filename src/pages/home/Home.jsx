@@ -29,7 +29,6 @@ export default function Home() {
           Profile
         </LinkButton>
       </NavBar>
-      <CreatePost />
       <Outlet />
     </div>
   );

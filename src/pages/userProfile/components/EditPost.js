@@ -1,22 +1,23 @@
 import React, { useEffect, useRef, useState } from "react";
-import { RiImage2Line, RiCloseLine, RiEditLine } from "react-icons/ri";
+import { RiImage2Line, RiEditLine } from "react-icons/ri";
 import { Button, Image, Input, Box } from "src/components";
-import { Wrapper, Header, Footer, Main } from "./CreatePost.styled";
+import { Wrapper, Header, Footer, Main } from "./EditPost.styled";
 import apiCloudinary from "src/hooks/useCloudinary";
 import { useDispatch } from "react-redux";
-import { createAPost } from "src/redux/reducers/postsSlice";
+import { createAPost, editAPost } from "src/redux/reducers/postsSlice";
 
-export default function CreatePost({ post }) {
+export default function EditPost({ post, onSavePost, onCreatePost }) {
   const mainRef = useRef(null);
   const fileInput = useRef(null);
-
-  const [isEditing, setIsEditing] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
   const [image, setImage] = useState(null);
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (mainRef.curernt) {
       mainRef.current.focus();
     }
+
     if (post) {
       setIsEditing(true);
       mainRef.current.innerText = post.content;
@@ -43,28 +44,31 @@ export default function CreatePost({ post }) {
   };
 
   const onPublish = async () => {
+    let mediaUrl;
     if (!isEditing) {
-      const mediaUrl = image ? await apiCloudinary(image) : undefined;
+      mediaUrl = image ? await apiCloudinary(image) : undefined;
     }
+    let action = isEditing ? editAPost : createAPost;
+    let postAction = isEditing ? onSavePost : onCreatePost;
     dispatch(
-      createAPost({
+      action({
+        _id: post?._id,
         postData: {
           content: mainRef.current.innerText,
-          mediaUrl: image,
+          mediaUrl,
         },
       })
-    ).then((response) => {
-      console.log({ response });
+    ).then(() => {
       mainRef.current.innerText = "Enter something here";
       clearImage();
+      if (postAction) {
+        postAction();
+      }
     });
   };
 
   return (
     <Wrapper>
-      <Header>
-        <RiEditLine /> Create Post
-      </Header>
       <Box>
         {image && (
           <>
@@ -85,7 +89,7 @@ export default function CreatePost({ post }) {
       <Main
         ref={mainRef}
         auto
-        contentEditable={isEditing}
+        contentEditable={true}
         suppressContentEditableWarning
       >
         Enter something here
@@ -98,7 +102,7 @@ export default function CreatePost({ post }) {
           disabled={!image}
           onClick={onPublish}
         >
-          Publish
+          {isEditing ? "Save" : "Publish"}
         </Button>
       </Footer>
     </Wrapper>

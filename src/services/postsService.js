@@ -9,6 +9,7 @@ const PostsService = {
       throw error;
     }
   },
+
   getPost: async ({ postId }) => {
     try {
       const response = await Api.get(`/api/posts/${postId}`);
@@ -36,6 +37,27 @@ const PostsService = {
     }
   },
 
+  editPost: async (post) => {
+    try {
+      const response = await Api.post(`/api/posts/edit/${post._id}`, {
+        ...post,
+      });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  deletePost: async (postId) => {
+    try {
+      const response = await Api.delete(`/api/posts/${postId}`);
+      console.log({ response });
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+
   createComment: async (postId, comment) => {
     try {
       const response = await Api.post(`/api/posts/${postId}/comment`, {
@@ -46,6 +68,7 @@ const PostsService = {
       throw error;
     }
   },
+
   likeAPost: async (postId) => {
     try {
       const response = await Api.post(`/api/posts/like/${postId}`);

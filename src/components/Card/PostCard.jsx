@@ -10,6 +10,8 @@ import {
   RiMessage2Line,
   RiBookMarkLine,
   RiDislikeLine,
+  RiDeleteBinLine,
+  RiEditBoxLine,
 } from "react-icons/ri";
 import { useAuth } from "src/contexts";
 import clsx from "clsx";
@@ -23,12 +25,15 @@ export default function ({
   doBookmark = () => {},
   doRemoveBookmark = () => {},
   isBookmarked = () => {},
+  deletePost = () => {},
+  editPost = () => {},
   ...rest
 }) {
   const navigate = useNavigate();
   const { authState } = useAuth();
   const users = useSelector((state) => state.users.users);
   const { mediaUrl, username, createdAt, likes, comments, _id } = post;
+  const canEdit = username === authState.user.username;
 
   const isLikedByMe = () =>
     likes.likeCount &&
@@ -54,8 +59,12 @@ export default function ({
     navigate(`/home/profile/${username}`);
   };
 
+  const viewPost = (e) => {
+    navigate(`/home/viewPost/${_id}`);
+  };
+
   return (
-    <StyledWrapper {...rest}>
+    <StyledWrapper {...rest} onClick={viewPost}>
       <Header>
         <Box display="flex" alignItems="center">
           <Image
@@ -83,24 +92,39 @@ export default function ({
         <Icon>
           <RiEyeLine />
         </Icon>
+
         <Icon onClick={doLike}>
           <RiHeart2Line className={clsx({ active: isLikedByMe() })} />
           <sub>
             <small>{likes.likeCount > 0 ? likes.likeCount : ""}</small>
           </sub>
         </Icon>
-        <Icon onClick={doDisLike}>
-          <RiDislikeLine className={clsx({ active: isDislikedByMe() })} />
-        </Icon>
+
+        {!canEdit && (
+          <Icon onClick={doDisLike}>
+            <RiDislikeLine className={clsx({ active: isDislikedByMe() })} />
+          </Icon>
+        )}
+
         <Icon>
           <RiMessage2Line />
           <sub>
             <small>{comments.length > 0 ? comments.length : ""}</small>
           </sub>
         </Icon>
-        <Icon onClick={haveBookmarked ? doRemoveBookmark : doBookmark}>
-          <RiBookMarkLine className={clsx({ active: haveBookmarked })} />
-        </Icon>
+
+        {!canEdit && (
+          <Icon onClick={haveBookmarked ? doRemoveBookmark : doBookmark}>
+            <RiBookMarkLine className={clsx({ active: haveBookmarked })} />
+          </Icon>
+        )}
+
+        {canEdit && (
+          <>
+            <RiDeleteBinLine onClick={(e) => deletePost(e, _id)} />
+            <RiEditBoxLine onClick={(e) => editPost(e, post)} />
+          </>
+        )}
       </Footer>
     </StyledWrapper>
   );
