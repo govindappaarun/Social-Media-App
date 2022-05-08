@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import { RiImage2Line, RiCloseLine, RiEditLine } from "react-icons/ri";
-import PostsService from "src/services/postsService";
 import { Button, Image, Input, Box } from "src/components";
 import { Wrapper, Header, Footer, Main } from "./CreatePost.styled";
 import apiCloudinary from "src/hooks/useCloudinary";
+import { useDispatch } from "react-redux";
+import { createAPost } from "src/redux/reducers/postsSlice";
 
 export default function CreatePost() {
   const mainRef = useRef(null);
@@ -11,7 +12,7 @@ export default function CreatePost() {
 
   const [isEditing, setIsEditing] = useState(true);
   const [image, setImage] = useState(null);
-
+  const dispatch = useDispatch();
   useEffect(() => {
     if (mainRef.curernt) {
       mainRef.current.focus();
@@ -38,12 +39,14 @@ export default function CreatePost() {
 
   const onPublish = async () => {
     const mediaUrl = image ? await apiCloudinary(image) : undefined;
-    PostsService.createPost({
-      postData: {
-        content: mainRef.current.innerText,
-        mediaUrl,
-      },
-    }).then((response) => {
+    dispatch(
+      createAPost({
+        postData: {
+          content: mainRef.current.innerText,
+          mediaUrl,
+        },
+      })
+    ).then((response) => {
       console.log({ response });
       mainRef.current.innerText = "Enter something here";
       clearImage();
