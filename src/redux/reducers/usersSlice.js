@@ -39,6 +39,20 @@ export const unfollowAUser = createAsyncThunk(
   }
 );
 
+export const getUserProfile = createAsyncThunk(
+  "user/getProfile",
+  async (userId) => {
+    return await UserService.getUser(userId);
+  }
+);
+
+export const editUserProfile = createAsyncThunk(
+  "user/editUserProfile",
+  async (values) => {
+    return await UserService.editUser({ ...values });
+  }
+);
+
 const followUnfollowUser = (state, action) => {
   state.users = state.users.map((user) => {
     if (user._id === action.payload.followUser._id) {
@@ -65,7 +79,13 @@ const usersSlice = createSlice({
       .addCase(doBookmark.fulfilled, updateBookmarks)
       .addCase(doRemoveBookmark.fulfilled, updateBookmarks)
       .addCase(followAUser.fulfilled, followUnfollowUser)
-      .addCase(unfollowAUser.fulfilled, followUnfollowUser);
+      .addCase(unfollowAUser.fulfilled, followUnfollowUser)
+      .addCase(getUserProfile.fulfilled, (state, action) => {
+        state.currentUser = action.payload.user;
+      })
+      .addCase(editUserProfile.fulfilled, (state, action) => {
+        state.currentUser = action.payload.user;
+      });
   },
 });
 

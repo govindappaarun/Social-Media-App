@@ -16,3 +16,7 @@ export const useUserList = () => {
     [allUsers, authState]
   );
 };
+
+export const useCurrentUser = () => {
+  return useSelector((state) => state.users.currentUser);
+};

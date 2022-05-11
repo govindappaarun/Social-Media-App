@@ -24,10 +24,6 @@ export default function UserFeed() {
     dispatch(getAllPosts());
   }, []);
 
-  const viewPost = ({ _id }) => {
-    navigate(`/home/viewPost/${_id}`);
-  };
-
   const isBookmarked = (postId) => {
     return bookmarks.some((bookmark) => bookmark._id === postId);
   };
@@ -77,12 +73,7 @@ export default function UserFeed() {
       <Box display="flex" wrap="wrap" gap="md">
         {sortedFeed &&
           sortedFeed.map((post, index) => (
-            <PostCard
-              post={post}
-              key={index}
-              onClick={() => viewPost(post)}
-              isBookmarked={isBookmarked}
-            />
+            <PostCard post={post} key={index} isBookmarked={isBookmarked} />
           ))}
       </Box>
     </Wrapper>

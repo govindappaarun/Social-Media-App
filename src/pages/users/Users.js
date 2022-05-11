@@ -45,6 +45,7 @@ export default function Users() {
           return (
             <UserCard
               key={index}
+              className="user"
               user={user}
               onFollowUser={onFollowUser}
               isFollowed={isUserFollowed(user)}

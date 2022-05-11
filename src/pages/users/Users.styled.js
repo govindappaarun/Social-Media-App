@@ -8,6 +8,9 @@ const Wrapper = styled.div`
   .img-round {
     width: 4rem;
   }
+  .user {
+    max-width: 35rem;
+  }
 `;
 
 const User = styled(Box)`

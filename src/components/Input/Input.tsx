@@ -9,13 +9,17 @@ export type InputProps = {
   min?: number;
   max?: number;
   name?: string;
+  value?: string;
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 export type Ref = HTMLInputElement;
 
 const Input = React.forwardRef<Ref, InputProps>(
-  ({ type, placeholder, children, min, max, name, onChange, ...rest }, ref) => {
+  (
+    { type, placeholder, children, min, max, name, onChange, value, ...rest },
+    ref
+  ) => {
     return (
       <StyledInput type={type} {...rest}>
         {children}
@@ -27,6 +31,7 @@ const Input = React.forwardRef<Ref, InputProps>(
           max={max}
           name={name}
           onChange={onChange}
+          value={value}
         />
       </StyledInput>
     );

@@ -30,6 +30,18 @@ export const postAComment = createAsyncThunk(
   }
 );
 
+export const createAPost = createAsyncThunk("post/create", async (post) => {
+  return await PostsService.createPost(post);
+});
+
+export const editAPost = createAsyncThunk("post/edit", async (post) => {
+  return await PostsService.editPost(post);
+});
+
+export const deleteAPost = createAsyncThunk("post/delete", async (postId) => {
+  return await PostsService.deletePost(postId);
+});
+
 const postsSlice = createSlice({
   name: "posts",
   initialState,
@@ -64,6 +76,15 @@ const postsSlice = createSlice({
         state.posts = action.payload.posts;
       })
       .addCase(postAComment.fulfilled, (state, action) => {
+        state.posts = action.payload.posts;
+      })
+      .addCase(createAPost.fulfilled, (state, action) => {
+        state.posts.push(action.payload?.post);
+      })
+      .addCase(editAPost.fulfilled, (state, action) => {
+        state.posts = action.payload.posts;
+      })
+      .addCase(deleteAPost.fulfilled, (state, action) => {
         state.posts = action.payload.posts;
       });
   },

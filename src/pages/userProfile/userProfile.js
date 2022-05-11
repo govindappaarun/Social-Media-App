@@ -1,41 +1,54 @@
 import { useEffect, useRef, useState } from "react";
 import { HiOutlineCamera } from "react-icons/hi";
+import { RiEdit2Line } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { Box, Image, Input, Typography } from "src/components";
+import { Box, Button, Image, Input, Modal, Typography } from "src/components";
 import { PostCard } from "src/components/Card";
 import { useAuth } from "src/contexts";
 import apiCloudinary from "src/hooks/useCloudinary";
+import {
+  deleteAPost,
+  editAPost,
+  getAllPosts,
+} from "src/redux/reducers/postsSlice";
+import { editUserProfile, getUserProfile } from "src/redux/reducers/usersSlice";
 import PostsService from "src/services/postsService";
 import UserService from "src/services/userService";
+import { useCurrentUser } from "../users/redux/selectors";
+import CreatePostContainer from "./components/CreatePostContainer";
+import EditPost from "./components/EditPost";
+import EditPostContainer from "./components/EditPostContainer";
+import EditProfile from "./components/EditProfile";
 import { Wrapper } from "./userProfile.styled";
 
 export default function UserProfile() {
-  const [userProfile, setUserProfile] = useState(null);
-  const [posts, setPosts] = useState(null);
   const [image, setImage] = useState(null);
   const [wallpaper, setWallpaper] = useState(null);
   const [isEditable, setIsEditable] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [isEditingPost, setIsEditingPost] = useState(false);
+  const [isCreatingPost, setIsCreatingPost] = useState(false);
+  const [currentPost, setCurrentPost] = useState(null);
   const fileInput = useRef(null);
   const fileInput2 = useRef(null);
   const { userId } = useParams();
   const { authState } = useAuth();
+  const dispatch = useDispatch();
+  const userProfile = useCurrentUser();
+
+  const currentUser = userId === "me" ? authState.user.username : userId;
+  const posts = useSelector((state) => state.userFeed.posts)?.filter(
+    ({ username }) => username === currentUser
+  );
 
   useEffect(() => {
-    let user;
-    if (userId && userId === "me") {
-      user = JSON.parse(localStorage.getItem("user"));
-    }
-    UserService.getUser(user ? user.username : userId).then((response) => {
-      setUserProfile(response.user);
-    });
+    dispatch(getAllPosts());
+  }, []);
 
-    PostsService.getMyPosts(user ? user.username : userId).then((response) => {
-      setPosts(response.posts);
-    });
-    setIsEditable(
-      (user && user.username === authState.user.username) ||
-        userId === authState.user.username
-    );
+  useEffect(() => {
+    dispatch(getUserProfile(currentUser));
+    setIsEditable(userId === "me");
   }, [userId]);
 
   useEffect(() => {
@@ -85,6 +98,37 @@ export default function UserProfile() {
     });
   }
 
+  const editProfile = () => {
+    setIsEditing(true);
+  };
+
+  const saveProfile = (values) => {
+    dispatch(editUserProfile(values)).then(() => {
+      setIsEditing(false);
+    });
+  };
+
+  const onDeletePost = (e, postId) => {
+    e.stopPropagation();
+    dispatch(deleteAPost(postId));
+  };
+
+  const onEditPost = (e, post) => {
+    e.stopPropagation();
+    setIsEditingPost(true);
+    setCurrentPost(post);
+  };
+
+  const onSavePost = () => {
+    setIsEditingPost(false);
+    setCurrentPost(null);
+  };
+
+  const onCreatePost = () => {
+    setIsCreatingPost(false);
+    setCurrentPost(null);
+  };
+
   return (
     <Wrapper>
       {userProfile && (
@@ -130,7 +174,7 @@ export default function UserProfile() {
               <Typography variant="h4">
                 Bio: {userProfile.bio || "Add your bio here"}
               </Typography>
-              {isEditable && <span>edit</span>}
+              {isEditable && <RiEdit2Line onClick={() => editProfile()} />}
               <Typography variant="h3">{userProfile.email}</Typography>
               <Typography
                 variant="h3"
@@ -138,17 +182,58 @@ export default function UserProfile() {
                 href={userProfile.profile}
                 color="primary"
               >
-                {userProfile.github}
+                {userProfile.profileUrl}
               </Typography>
             </Box>
+
+            <Modal
+              open={isEditing}
+              onClose={() => setIsEditing(false)}
+              className="profile-modal"
+            >
+              <EditProfile profile={userProfile} onSaveprofile={saveProfile} />
+            </Modal>
+
+            <Modal
+              open={isEditingPost || isCreatingPost}
+              onClose={() => {
+                setIsEditingPost(false);
+                setIsCreatingPost(false);
+              }}
+              className="profile-modal"
+            >
+              {isEditingPost && (
+                <EditPostContainer post={currentPost} onSavePost={onSavePost} />
+              )}
+              {isCreatingPost && (
+                <CreatePostContainer onCreatePost={onCreatePost} />
+              )}
+            </Modal>
+
             <Box className="posts-section">
-              <Typography variant="h2" className="heading">
-                My Posts ( {posts && posts.length} )
-              </Typography>
+              <Box
+                display="flex"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Typography variant="h2" className="heading">
+                  My Posts ( {posts && posts.length} )
+                </Typography>
+                <Button color="success" onClick={() => setIsCreatingPost(true)}>
+                  Create
+                </Button>
+              </Box>
               {posts && (
                 <Box display="flex" gap="md" wrap="wrap">
                   {posts.map((post) => {
-                    return <PostCard key={post._id} post={post} />;
+                    return (
+                      <PostCard
+                        key={post._id}
+                        post={post}
+                        deletePost={onDeletePost}
+                        editPost={onEditPost}
+                      />
+                    );
                   })}
                 </Box>
               )}
