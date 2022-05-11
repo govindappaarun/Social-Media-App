@@ -59,7 +59,7 @@ export default function ({
     navigate(`/home/profile/${username}`);
   };
 
-  const viewPost = (e) => {
+  const viewPost = () => {
     navigate(`/home/viewPost/${_id}`);
   };
 
