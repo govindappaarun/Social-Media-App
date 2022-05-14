@@ -32,7 +32,7 @@ export default function ({
   const navigate = useNavigate();
   const { authState } = useAuth();
   const users = useSelector((state) => state.users.users);
-  const { mediaUrl, username, createdAt, likes, comments, _id } = post;
+  const { mediaUrl, username, createdAt, likes, comments, _id, content } = post;
   const canEdit = username === authState.user.username;
 
   const isLikedByMe = () =>
@@ -81,6 +81,7 @@ export default function ({
         </Box>
       </Header>
       <Main>
+        <Typography className="content">{content}</Typography>
         <Image className="img-responsive" src={mediaUrl} alt="profile" />
       </Main>
       <Footer

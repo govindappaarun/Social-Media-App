@@ -31,6 +31,14 @@ const Main = styled.main`
     min-height: 15rem;
     max-height: 15rem;
   }
+  .content {
+    padding: 5px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 `;
 
 const Footer = styled(Box)``;
