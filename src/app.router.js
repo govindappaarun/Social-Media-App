@@ -26,6 +26,10 @@ const privateRoutes = [
     ),
     children: [
       {
+        index: true,
+        element: <UserFeed />,
+      },
+      {
         path: "createPost",
         element: <div>Create Post</div>,
       },
