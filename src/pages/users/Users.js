@@ -39,7 +39,7 @@ export default function Users() {
 
   return (
     <Wrapper>
-      <Typography>Users to follow</Typography>
+      <Typography variant="h2">Users to follow</Typography>
       {users &&
         users.map((user, index) => {
           return (

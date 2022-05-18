@@ -6,6 +6,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "src/contexts";
 import authService from "src/services/authService";
 import { InputPassword } from "src/components/Input";
+import Header from "../home/components/header";
+import Footer from "../home/components/footer";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -24,6 +26,14 @@ export default function Login() {
   };
 
   const { onChange, onSubmit, values } = useForm(() => {
+    doLoginApi(values);
+  }, initialState);
+
+  const doGuestLogin = () => {
+    doLoginApi({ username: "vl-guest@gmail.com", password: "guest123" });
+  };
+
+  const doLoginApi = (values) => {
     authService
       .doLogin(values)
       .then((result) => {
@@ -35,52 +45,61 @@ export default function Login() {
       .catch((err) => {
         console.log({ err });
       });
-  }, initialState);
+  };
 
   const onLogin = () => {
     if (state && state.from) {
       navigate(state.from.pathname, { replace: true });
     } else {
-      navigate("/products");
+      navigate("/home");
     }
   };
 
   return (
-    <Wrapper>
-      <StyledForm
-        action="#"
-        className="flex-column flex-gap"
-        onSubmit={onSubmit}
-      >
-        <Typography variant="h1" className="text-center secondary">
-          {/* Sign In To Your Account */}
-        </Typography>
-        <Input
-          placeholder="Enter username"
-          className="my-2"
-          name="username"
-          onChange={onChange}
+    <>
+      <Header />
+      <Wrapper>
+        <StyledForm
+          action="#"
+          className="flex-column flex-gap"
+          onSubmit={onSubmit}
         >
-          <label>username</label>
-        </Input>
-        <InputPassword
-          placeholder="Enter password"
-          className="my-2"
-          name="password"
-          onChange={onChange}
-          label="Password"
-        />
-        <Box
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-          className="my-1"
-        >
-          <Button color="primary">
-            Sign In <i className="fas fa-chevron-right"></i>
-          </Button>
-        </Box>
-      </StyledForm>
-    </Wrapper>
+          <Input
+            placeholder="Enter username"
+            className="my-2"
+            name="username"
+            onChange={onChange}
+          >
+            <label>username</label>
+          </Input>
+          <InputPassword
+            placeholder="Enter password"
+            className="my-2"
+            name="password"
+            onChange={onChange}
+            label="Password"
+          />
+          <Box display="flex" gap="md" direction="column">
+            <Button
+              color="primary"
+              style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem" }}
+            >
+              Sign In
+            </Button>
+
+            <Button
+              color="success"
+              outline
+              type="button"
+              onClick={doGuestLogin}
+              style={{ paddingTop: "0.5rem", paddingBottom: "0.5rem" }}
+            >
+              Guest Sign In
+            </Button>
+          </Box>
+        </StyledForm>
+      </Wrapper>
+      <Footer />
+    </>
   );
 }

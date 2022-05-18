@@ -5,6 +5,9 @@ import { Box, NavBar } from "src/components";
 import { LinkButton } from "src/components/Button";
 import { getAllUsers, getBookmarks } from "src/redux/reducers/usersSlice";
 import Users from "../users";
+import Footer from "./components/footer";
+import Header from "./components/header";
+import Sidebar, { SideBarLeft, SideBarRight } from "./components/sidebar";
 import { Main, SideBar, Wrapper } from "./Home.styled";
 
 export default function Home() {
@@ -15,29 +18,20 @@ export default function Home() {
   }, []);
 
   return (
-    <Wrapper>
-      <NavBar></NavBar>
-      <Box display="flex" gap="md" className="container">
-        <SideBar className="left">
-          <Box direction="column" display="flex">
-            <LinkButton color="primary" to="feed">
-              Feed
-            </LinkButton>
-            <LinkButton color="primary" to="bookmarks">
-              Bookmarks
-            </LinkButton>
-            <LinkButton color="primary" to="profile/me">
-              Profile
-            </LinkButton>
-          </Box>
-        </SideBar>
-        <Main>
-          <Outlet />
-        </Main>
-        <SideBar className="right">
-          <Users />
-        </SideBar>
-      </Box>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <Header className="header" />
+        <Box display="flex" gap="md" className="container">
+          <SideBarLeft />
+          <Main>
+            <Outlet />
+          </Main>
+          <SideBarRight>
+            <Users />
+          </SideBarRight>
+        </Box>
+        <Footer />
+      </Wrapper>
+    </>
   );
 }
