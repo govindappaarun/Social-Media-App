@@ -32,4 +32,19 @@ export const users = [
     createdAt: formatDate(),
     updatedAt: formatDate(),
   },
+  {
+    _id: uuid(),
+    firstName: "Guest",
+    lastName: "Guest",
+    username: "vl-guest@gmail.com",
+    profile: "https://profile.com/govindappaarun",
+    password: "guest123",
+    wallpaper:
+      "https://res.cloudinary.com/db9adijl0/image/upload/v1650855699/profile/pexels-photo-220453_zya0qb.webp",
+    avatar:
+      "https://res.cloudinary.com/db9adijl0/image/upload/v1650854948/profile/nature3_cqyhtq.jpg",
+
+    createdAt: formatDate(),
+    updatedAt: formatDate(),
+  },
 ];

@@ -44,7 +44,6 @@ export default function UserFeed() {
 
   return (
     <Wrapper display="flex" direction="column" gap="md">
-      <Typography variant="h2">UserFeed</Typography>
       <Box display="flex">
         <LinkButton
           to={`/home/feed/date`}

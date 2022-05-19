@@ -13,6 +13,7 @@ import {
 } from "src/redux/reducers/postsSlice";
 import { doBookmark, doRemoveBookmark } from "src/redux/reducers/usersSlice";
 import PostsService from "src/services/postsService";
+import { Wrapper } from "./ViewPost.styled";
 
 export default function ViewPost() {
   const { postId } = useParams();
@@ -45,8 +46,7 @@ export default function ViewPost() {
   };
 
   return (
-    <div>
-      <Typography variant="h2">Viewing Post</Typography>
+    <Wrapper display="flex" direction="column" alignItems="start" gap="md">
       {post && (
         <PostCard
           post={post}
@@ -55,9 +55,10 @@ export default function ViewPost() {
           doBookmark={onBookmarkAPost}
           doRemoveBookmark={onRemoveBookmark}
           isBookmarked={isBookmarked}
+          className="view-card"
         />
       )}
-      <Typography>Comments</Typography>
+      <Typography variant="h2">Comments</Typography>
       {post &&
         post.comments.map((comment, index) => (
           <CommentCard comment={comment} key={index} />
@@ -66,6 +67,6 @@ export default function ViewPost() {
         <Typography>No comments found</Typography>
       )}
       <CommentBox onSave={onPostAComment} />
-    </div>
+    </Wrapper>
   );
 }

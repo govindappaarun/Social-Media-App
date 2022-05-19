@@ -8,14 +8,9 @@ const StyledWrapper = styled.section`
   flex-direction: column;
   gap: 0.5rem;
   box-shadow: 0px 2px 4px ${(p) => p.theme.background.bg10};
-  min-width: 50rem;
-  max-width: 50rem;
-  padding-left: 1rem;
-
-  &.child {
-    min-width: 40rem;
-    max-width: 40rem;
-  }
+  min-width: 35rem;
+  max-width: 35rem;
+  padding: 1rem;
 `;
 
 export { StyledWrapper as default };

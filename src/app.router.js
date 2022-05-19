@@ -11,7 +11,7 @@ import Welcome from "./pages/welcome";
 import SecureRoute from "./SecureRoute";
 
 const publicRoutes = [
-  { path: "/", element: <Welcome /> },
+  { path: "/", element: <Login /> },
   { path: "/sign-up", element: <SignUp /> },
   { path: "/login", element: <Login /> },
 ];
@@ -25,6 +25,10 @@ const privateRoutes = [
       </SecureRoute>
     ),
     children: [
+      {
+        index: true,
+        element: <UserFeed />,
+      },
       {
         path: "createPost",
         element: <div>Create Post</div>,
