@@ -40,7 +40,6 @@ export const Wrapper = styled.div`
     }
   }
   .posts-section {
-    margin-top: 2rem;
     .heading {
       margin: 2rem 0;
       padding-bottom: 10px;

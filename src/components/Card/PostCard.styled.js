@@ -46,6 +46,7 @@ const Footer = styled(Box)``;
 
 const Icon = styled.span(() => [
   css`
+    color: ${(p) => p.theme.base.contrast};
     font-size: 1.5rem;
     &:hover,
     .active {

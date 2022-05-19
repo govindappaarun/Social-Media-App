@@ -141,7 +141,7 @@ export default function UserProfile() {
               <HiOutlineCamera className="camera" onClick={clickFileInput2} />
             )}
           </Box>
-          <Box display="flex" wrap="wrap" gap="lg">
+          <Box display="flex" wrap="wrap" direction="column" gap="lg">
             <Box>
               <Box className="profile-pic">
                 <Image
@@ -214,7 +214,7 @@ export default function UserProfile() {
               <Box
                 display="flex"
                 justifyContent="space-between"
-                alignItems="center"
+                alignItems="flex-start"
               >
                 <Typography variant="h2" className="heading">
                   My Posts ( {posts && posts.length} )
@@ -223,20 +223,16 @@ export default function UserProfile() {
                   Create
                 </Button>
               </Box>
-              {posts && (
-                <Box display="flex" gap="md" wrap="wrap">
-                  {posts.map((post) => {
-                    return (
-                      <PostCard
-                        key={post._id}
-                        post={post}
-                        deletePost={onDeletePost}
-                        editPost={onEditPost}
-                      />
-                    );
-                  })}
-                </Box>
-              )}
+              <Box display="flex" wrap="wrap" justifyContent="center">
+                {posts?.map((post) => (
+                  <PostCard
+                    key={post._id}
+                    post={post}
+                    deletePost={onDeletePost}
+                    editPost={onEditPost}
+                  />
+                ))}
+              </Box>
             </Box>
           </Box>
         </>

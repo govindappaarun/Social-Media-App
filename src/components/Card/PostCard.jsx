@@ -122,8 +122,12 @@ export default function ({
 
         {canEdit && (
           <>
-            <RiDeleteBinLine onClick={(e) => deletePost(e, _id)} />
-            <RiEditBoxLine onClick={(e) => editPost(e, post)} />
+            <Icon>
+              <RiDeleteBinLine onClick={(e) => deletePost(e, _id)} />
+            </Icon>
+            <Icon>
+              <RiEditBoxLine onClick={(e) => editPost(e, post)} />
+            </Icon>
           </>
         )}
       </Footer>
