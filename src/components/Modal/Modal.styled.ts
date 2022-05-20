@@ -18,7 +18,7 @@ const Main = styled(Box)`
   transform: translate(-50%, -50%);
 
   height: 70vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   padding: 10px;
   min-width: 25vw;
   max-width: 100%;

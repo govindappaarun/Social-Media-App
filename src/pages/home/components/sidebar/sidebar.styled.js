@@ -11,14 +11,16 @@ export const Wrapper = styled.div`
   color: ${(p) => p.theme.base.contrast};
   .links {
     border-bottom: 1px solid lightgray;
-    padding: 2rem auto;
-    padding-bottom: 3rem;
+    padding: 1.5rem auto;
+    padding-bottom: 1.5rem;
+
     a {
       padding: 1rem;
       font-size: 1.5rem;
       margin: 0.5rem 0;
       gap: 1rem;
     }
+
     a:hover {
       color: #e88c33;
       font-weight: 500;

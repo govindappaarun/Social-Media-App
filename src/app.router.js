@@ -7,8 +7,9 @@ import UserFeed from "./pages/userFeed";
 import Users from "./pages/users";
 import UserProfile from "./pages/userProfile";
 import ViewPost from "./pages/viewPost";
-import Welcome from "./pages/welcome";
 import SecureRoute from "./SecureRoute";
+import CreatePost from "./pages/home/components";
+import Explore from "./pages/explore";
 
 const publicRoutes = [
   { path: "/", element: <Login /> },
@@ -31,12 +32,13 @@ const privateRoutes = [
       },
       {
         path: "createPost",
-        element: <div>Create Post</div>,
+        element: <CreatePost />,
       },
       {
         path: "feed/*",
         element: <UserFeed />,
       },
+      { path: "explore", element: <Explore /> },
       {
         path: "bookmarks",
         element: <Bookmarks />,

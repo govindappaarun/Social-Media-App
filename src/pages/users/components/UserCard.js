@@ -20,7 +20,7 @@ export default function UserCard({
       </Typography>
       <Button
         outline
-        color={isFollowed ? "warning" : "secondary"}
+        color={isFollowed ? "warning" : "success"}
         radius="4px"
         className="ml-auto"
         onClick={(e) => {
