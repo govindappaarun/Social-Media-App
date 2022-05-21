@@ -10,7 +10,6 @@ import {
   RiNotificationLine,
   RiSearchLine,
   RiUserLine,
-  RiVideoLine,
 } from "react-icons/ri";
 
 export default function Header({ ...rest }) {

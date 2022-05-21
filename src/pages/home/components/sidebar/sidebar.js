@@ -8,24 +8,25 @@ import { MdOutlinePostAdd } from "react-icons/md";
 import { FaInternetExplorer } from "react-icons/fa";
 
 export function SideBarLeft({ ...rest }) {
+  const isActiveLink = ({ isActive }) => (isActive ? "active" : "");
   return (
     <Wrapper>
       <Box direction="column" display="flex" className="links">
-        <LinkButton color="primary" to="feed">
+        <LinkButton className={isActiveLink} color="primary" to="feed">
           <CgFeed /> Feed
         </LinkButton>
-        <LinkButton color="primary" to="bookmarks">
+        <LinkButton className={isActiveLink} color="primary" to="bookmarks">
           <RiBookMarkLine /> Bookmarks
         </LinkButton>
-        <LinkButton color="primary" to="profile/me">
+        <LinkButton className={isActiveLink} color="primary" to="profile/me">
           <RiProfileLine /> Profile
         </LinkButton>
       </Box>
       <Box className="links">
-        <LinkButton to="explore" color="primary">
+        <LinkButton className={isActiveLink} to="explore" color="primary">
           <FaInternetExplorer size={45} /> Explore
         </LinkButton>
-        <LinkButton to="createPost" color="success">
+        <LinkButton className={isActiveLink} to="createPost" color="success">
           <MdOutlinePostAdd size={45} /> Add a Post
         </LinkButton>
       </Box>

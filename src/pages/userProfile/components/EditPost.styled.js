@@ -47,6 +47,7 @@ const Main = styled.main`
   border: 1px solid ${(p) => p.theme.background.bg20};
   max-height: 20rem;
   overflow-y: auto;
+  min-height: 5rem;
 `;
 
 const Footer = styled(Box)`

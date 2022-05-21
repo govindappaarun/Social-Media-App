@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Outlet } from "react-router-dom";
 import { Box, NavBar } from "src/components";
-import { LinkButton } from "src/components/Button";
 import { getAllUsers, getBookmarks } from "src/redux/reducers/usersSlice";
 import Users from "../users";
 import Footer from "./components/footer";
 import Header from "./components/header";
-import Sidebar, { SideBarLeft, SideBarRight } from "./components/sidebar";
-import { Main, SideBar, Wrapper } from "./Home.styled";
+import { SideBarLeft, SideBarRight } from "./components/sidebar";
+import { Main, Wrapper } from "./Home.styled";
 
 export default function Home() {
   const dispatch = useDispatch();

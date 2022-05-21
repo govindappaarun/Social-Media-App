@@ -8,7 +8,7 @@ import Users from "./pages/users";
 import UserProfile from "./pages/userProfile";
 import ViewPost from "./pages/viewPost";
 import SecureRoute from "./SecureRoute";
-import CreatePost from "./pages/home/components";
+import CreatePost from "./pages/createPost";
 import Explore from "./pages/explore";
 
 const publicRoutes = [
