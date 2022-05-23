@@ -11,6 +11,7 @@ const Wrapper = styled.section`
   box-shadow: 0px 2px 4px ${(p) => p.theme.background.bg10};
   min-width: 30rem;
   min-height: 15rem;
+  color: ${(p) => p.theme.base.contrast};
 
   .img-preview {
     max-height: 250px;

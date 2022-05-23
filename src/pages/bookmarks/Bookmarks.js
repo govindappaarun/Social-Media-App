@@ -10,7 +10,7 @@ export default function Bookmarks() {
   return (
     <Wrapper display="flex" direction="column" gap="md">
       <Typography variant="h2">
-        {bookmarks.length === 0 && "No"} Bookmarks
+        {bookmarks.length === 0 && "Not found any"} Bookmarks
       </Typography>
 
       {bookmarks.map((bookmark) => (

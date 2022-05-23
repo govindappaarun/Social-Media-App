@@ -3,8 +3,7 @@ import styled from "styled-components";
 export const Wrapper = styled.div`
   margin: 0;
   padding: 0;
-  height: 100vh;
-  background-color: ${(p) => p.theme.base.main};
+  height: calc(100vh - 155px);
   color: ${(p) => p.theme.text.body};
   display: grid;
   place-items: center;

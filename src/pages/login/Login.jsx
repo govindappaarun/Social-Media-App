@@ -26,7 +26,9 @@ export default function Login() {
   };
 
   const { onChange, onSubmit, values } = useForm(() => {
-    doLoginApi(values);
+    if (values.username && values.password) {
+      doLoginApi(values);
+    }
   }, initialState);
 
   const doGuestLogin = () => {

@@ -10,7 +10,6 @@ import {
   RiNotificationLine,
   RiSearchLine,
   RiUserLine,
-  RiVideoLine,
 } from "react-icons/ri";
 
 export default function Header({ ...rest }) {
@@ -61,7 +60,7 @@ export default function Header({ ...rest }) {
               >
                 {theme}
               </ThemeIcon>
-              <Link to="/home/profile">
+              <Link to="/home/profile/me">
                 <RiUserLine className="mx-1" style={{ fontSize: "2rem" }} />
               </Link>
               <Button
@@ -75,9 +74,9 @@ export default function Header({ ...rest }) {
             </>
           ) : (
             <>
-              {!location.pathname.includes("signup") && (
+              {!location.pathname.includes("sign-up") && (
                 <Button
-                  onClick={() => navigate("/signup")}
+                  onClick={() => navigate("/sign-up")}
                   color="primary"
                   outline
                   className="btn btn-link btn-link-warning"

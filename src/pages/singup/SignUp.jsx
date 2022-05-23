@@ -15,6 +15,11 @@ export default function SingnUp() {
   };
 
   const { onChange, onSubmit, values } = useForm(() => {
+    if (
+      !(values.firstName && values.password && values.lastName && values.email)
+    ) {
+      return;
+    }
     authService
       .doSignUp(values)
       .then(() => {
@@ -41,6 +46,7 @@ export default function SingnUp() {
             name="firstName"
             onChange={onChange}
             className="my-1 flex-grow-1"
+            required
           >
             <label>First Name</label>
           </Input>
