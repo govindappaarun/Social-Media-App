@@ -48,6 +48,7 @@ const Main = styled.main`
   max-height: 20rem;
   overflow-y: auto;
   min-height: 5rem;
+  max-width: 30rem;
 `;
 
 const Footer = styled(Box)`
