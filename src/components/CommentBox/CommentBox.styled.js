@@ -3,7 +3,12 @@ import Box from "../Box";
 
 export const Wrapper = styled(Box)`
   padding: 1.25rem;
-  max-width: 35rem;
+  .avatar {
+    max-width: 3rem;
+  }
+  textarea {
+    padding: 5px;
+  }
 `;
 
 export const TextArea = styled.textarea``;

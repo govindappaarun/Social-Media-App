@@ -5,7 +5,7 @@ import { Wrapper } from "./sidebar.styled";
 import { CgFeed } from "react-icons/cg";
 import { RiBookMarkLine, RiProfileLine } from "react-icons/ri";
 import { MdOutlinePostAdd } from "react-icons/md";
-import { FaInternetExplorer } from "react-icons/fa";
+import { FaInternetExplorer, FaUsers } from "react-icons/fa";
 
 export function SideBarLeft({ ...rest }) {
   const isActiveLink = ({ isActive }) => (isActive ? "active" : "");
@@ -21,6 +21,13 @@ export function SideBarLeft({ ...rest }) {
         <LinkButton className={isActiveLink} color="primary" to="profile/me">
           <RiProfileLine /> Profile
         </LinkButton>
+        <LinkButton
+          className={[isActiveLink, "user-menu"].join(" ")}
+          color="primary"
+          to="users"
+        >
+          <FaUsers /> Users
+        </LinkButton>
       </Box>
       <Box className="links">
         <LinkButton className={isActiveLink} to="explore" color="primary">
@@ -35,5 +42,5 @@ export function SideBarLeft({ ...rest }) {
 }
 
 export function SideBarRight({ children, ...rest }) {
-  return <Wrapper>{children}</Wrapper>;
+  return <Wrapper {...rest}>{children}</Wrapper>;
 }

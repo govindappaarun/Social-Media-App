@@ -11,6 +11,9 @@ const StyledWrapper = styled.section`
   min-width: 35rem;
   max-width: 35rem;
   padding: 1rem;
+  .avatar {
+    max-width: 3rem;
+  }
 `;
 
 export { StyledWrapper as default };

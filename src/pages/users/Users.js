@@ -11,11 +11,13 @@ import {
 } from "src/redux/reducers/usersSlice";
 import { useAuth } from "src/contexts";
 import { useUserList } from "./redux/selectors";
+import { useNavigate } from "react-router-dom";
 
 export default function Users() {
   const { authState } = useAuth();
   const dispatch = useDispatch();
   const users = useUserList();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getAllUsers());
@@ -37,6 +39,10 @@ export default function Users() {
     }
   };
 
+  const viewProfile = ({ username }) => {
+    navigate(`profile/${username}`);
+  };
+
   return (
     <Wrapper>
       <Typography variant="h2">Users to follow</Typography>
@@ -49,6 +55,7 @@ export default function Users() {
               user={user}
               onFollowUser={onFollowUser}
               isFollowed={isUserFollowed(user)}
+              onClick={() => viewProfile(user)}
             />
           );
         })}

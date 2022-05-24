@@ -25,7 +25,7 @@ export default function Home() {
           <Main>
             <Outlet />
           </Main>
-          <SideBarRight>
+          <SideBarRight className="sidebar-right">
             <Users />
           </SideBarRight>
         </Box>

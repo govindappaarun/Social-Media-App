@@ -15,13 +15,25 @@ export const StyledNavBar = styled(NavBar)`
     cursor: pointer;
   }
   .search-bar {
-    display: flex;
     align-items: center;
     gap: 1rem;
     border: 1px solid;
     border-radius: 5px;
     padding: 5px 10px;
     min-width: 20vw;
+    display: none;
+  }
+
+  @media (max-width: ${({ theme }) => theme.mobile}) {
+    & {
+      padding: 0 5px;
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.tablet}) {
+    .search-bar {
+      display: flex;
+    }
   }
 `;
 

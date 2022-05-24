@@ -14,8 +14,25 @@ export const Wrapper = styled.div`
     z-index: 9;
   }
   background-color: ${(p) => p.theme.base.main};
+
+  @media (max-width: ${({ theme }) => theme.tablet}) {
+    .sidebar-right {
+      display: none;
+    }
+  }
+
+  @media (min-width: ${({ theme }) => theme.tablet}) {
+    .sidebar-right {
+      display: block;
+    }
+  }
 `;
 
 export const Main = styled.main`
   flex-basis: 49%;
+  margin-top: 1rem;
+  @media (max-width: ${({ theme }) => theme.tablet}) {
+    flex-basis: 75%;
+    flex-grow: 1;
+  }
 `;
