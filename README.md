@@ -30,9 +30,8 @@ https://user-images.githubusercontent.com/98606563/170002221-d854db5c-6dd1-4e4c-
 Here are some of the prominant features covered part of this application
 
 Create a Post
-1.Upload Images & Videos → P1
-2.Emoji & Gif enabled → P1
-3.Like
+Upload Images 
+Like
 Comment & Replies
 Edit & Delete Post
 User Feed
@@ -49,8 +48,7 @@ Authentication
 Sign-up
 Login
 Logout
-
-## Walkthrough
+Theme
 
 ## Installation!
 
