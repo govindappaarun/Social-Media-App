@@ -1,8 +1,9 @@
 import React, { createContext, useState, useContext } from "react";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 import themes from "../theme/theme";
-type Theme = "dark" | "light";
+import { breakPoints } from "../theme/breakPoints";
 
+type Theme = "dark" | "light";
 interface ThemContextInterface {
   theme: Theme;
   toggleTheme: () => void;
@@ -20,7 +21,7 @@ ThemeContext.displayName = "CustomThemeProvider";
 const ThemeProvider = ({ children }: Props) => {
   const [theme, setTheme] = useState<Theme>("light");
 
-  const themeObj = themes[theme];
+  const themeObj = { ...themes[theme], ...breakPoints };
 
   const toggleTheme = (): void => {
     let nextTheme: Theme = theme === "dark" ? "light" : "dark";

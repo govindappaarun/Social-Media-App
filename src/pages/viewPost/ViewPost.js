@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Typography } from "src/components";
 import CommentCard from "src/components/Card/CommentCard";
 import PostCard from "src/components/Card/PostCard";
@@ -16,10 +16,12 @@ import PostsService from "src/services/postsService";
 import { Wrapper } from "./ViewPost.styled";
 
 export default function ViewPost() {
+  const navigate = useNavigate();
   const { postId } = useParams();
   const dispatch = useDispatch();
   const bookmarks = useSelector((state) => state.users.bookmarks);
   const post = usePost(postId);
+  const users = useSelector((state) => state.users.users);
 
   const onPostAComment = (comment) => {
     dispatch(postAComment({ postId, comment }));
@@ -45,6 +47,16 @@ export default function ViewPost() {
     return bookmarks.some((bookmark) => bookmark._id === postId);
   };
 
+  const getProfilePic = (username) => {
+    let found = users.find((user) => user.username === username);
+    return (found && found.avatar) || "/default-profile.jpg";
+  };
+
+  const navigateToProfile = (e, username) => {
+    e.stopPropagation();
+    navigate(`/home/profile/${username}`);
+  };
+
   return (
     <Wrapper display="flex" direction="column" alignItems="start" gap="md">
       {post && (
@@ -61,12 +73,21 @@ export default function ViewPost() {
       <Typography variant="h2">Comments</Typography>
       {post &&
         post.comments.map((comment, index) => (
-          <CommentCard comment={comment} key={index} />
+          <CommentCard
+            getProfilePic={getProfilePic}
+            navigateToProfile={navigateToProfile}
+            comment={comment}
+            key={index}
+          />
         ))}
       {post && post.comments.length === 0 && (
         <Typography>No comments found</Typography>
       )}
-      <CommentBox onSave={onPostAComment} />
+      <CommentBox
+        getProfilePic={getProfilePic}
+        navigateToProfile={navigateToProfile}
+        onSave={onPostAComment}
+      />
     </Wrapper>
   );
 }

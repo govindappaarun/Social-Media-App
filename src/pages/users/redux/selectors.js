@@ -20,3 +20,23 @@ export const useUserList = () => {
 export const useCurrentUser = () => {
   return useSelector((state) => state.users.currentUser);
 };
+
+export const useUsers = () => {
+  return useSelector((state) => state.users.users);
+};
+
+export const useUserFeed = (allPosts) => {
+  const users = useUsers();
+  const { authState } = useAuth();
+  const currentUser = users?.find(
+    (user) => user.username === authState.user.username
+  );
+  let following = currentUser ? currentUser.following : [];
+  following = following.map(({ username }) => username);
+
+  // add current user
+  following.push(authState.user.username);
+
+  // filter allposts to give
+  return allPosts.filter((post) => following.indexOf(post.username) >= 0) || [];
+};
