@@ -19,6 +19,12 @@ Other libraries used with this App are React Router v6, styled-components, mockb
 
 ## Demo
 
+
+
+https://user-images.githubusercontent.com/98606563/170002221-d854db5c-6dd1-4e4c-b7d6-f7f1fc6acca2.mp4
+
+
+
 ## Features
 
 Here are some of the prominant features covered part of this application
