@@ -35,4 +35,8 @@ export const GlobalStyle = createGlobalStyle`
     font-size: 2rem;
   }
 
+  iframe {
+    pointer-events: none;
+  }
+
 `;
