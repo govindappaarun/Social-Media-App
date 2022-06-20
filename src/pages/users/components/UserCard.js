@@ -15,7 +15,10 @@ export default function UserCard({
         className="img-responsive img-round"
         src={user.avatar || "/default-profile.jpg"}
       />
-      <Typography className="profile-name">
+      <Typography
+        className="profile-name"
+        title={`${user.firstName} ${user.lastName}`}
+      >
         {user.firstName} {user.lastName}
       </Typography>
       <Button
